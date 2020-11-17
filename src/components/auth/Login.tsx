@@ -1,12 +1,16 @@
-import React, { ChangeEvent, Component, FormEvent } from 'react';
+import React, { Component } from 'react';
 
 type LoginState = {
   email: string,
   password: string,
 };
 
-class LoginComponent extends Component<{/* props */}, LoginState> {
-  constructor(props: any /* TODO: Update this */) {
+type AcceptedProps = {
+  authenticateUser: (token: string) => void,
+}
+
+class LoginComponent extends Component<AcceptedProps, LoginState> {
+  constructor(props: AcceptedProps) {
     super(props);
     this.state = {
       email: "",
@@ -19,7 +23,7 @@ class LoginComponent extends Component<{/* props */}, LoginState> {
     this.onLoginSubmit = this.onLoginSubmit.bind(this);
   }
 
-  async onLoginSubmit(event: FormEvent<HTMLFormElement>) {
+  async onLoginSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (this.state.email && this.state.password) {
@@ -35,22 +39,23 @@ class LoginComponent extends Component<{/* props */}, LoginState> {
       });
 
       let parsedResponse = await response.json();
-      console.log(parsedResponse);
+      let token = parsedResponse.token;
+      this.props.authenticateUser(token)
     } else {
       alert('Enter email AND password');
     }
   }
 
-  updateEmail(event: ChangeEvent<HTMLInputElement>) {
+  updateEmail(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       email: event.target.value
-    })
+    });
   }
   
-  updatePassword(event: ChangeEvent<HTMLInputElement>) {
+  updatePassword(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       password: event.target.value
-    })
+    });
   }
 
   render() {
