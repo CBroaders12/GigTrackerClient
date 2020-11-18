@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import LoginComponent from './components/auth/Login';
 import RegisterComponent from './components/auth/Register';
@@ -22,7 +22,8 @@ class App extends React.Component<{}, AppState> {
       isLoggedIn: false,
     }
 
-    this.authenticateUser = this.authenticateUser.bind(this)
+    this.authenticateUser = this.authenticateUser.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
   
   authenticateUser(token: string): void {
@@ -33,11 +34,18 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
+  handleLogout(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    localStorage.removeItem('sessionToken');
+    this.setState({
+      token: null,
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <BrowserRouter>
-          <NavigationComponent />
+          <NavigationComponent token={this.state.token} handleLogout={this.handleLogout}/>
           <Switch>
             <Route exact path="/login">
               <LoginComponent authenticateUser={this.authenticateUser} token={this.state.token} />
