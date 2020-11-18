@@ -5,3 +5,22 @@
 .MuiToolbar-root {
   justify-content: space-between;
 }
+
+.authContainer {
+  height: 95vh;
+  background: url('./images/pexels-ylanite-koppens-934067\ \(1\).jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 15%; 
+}
+
+.navBar {
+  background-color: red;
+}
+
+.authForm {
+  min-width: 350px;
+  max-width: 500px;
+  margin: auto;
+  padding: 3rem;
+}

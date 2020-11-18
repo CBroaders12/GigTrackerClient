@@ -14,7 +14,7 @@ class NavigationComponent extends Component<NavbarProps, {/* state */}> {
 
   render() {
     return(
-      <AppBar position="static">
+      <AppBar position="static" color="default">
         <Toolbar>
           <Typography variant="h6" >
             GigTracker

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { TextField, Paper, Container, Button } from '@material-ui/core';
 
 type RegisterState = {
   email: string,
@@ -11,6 +12,9 @@ type AcceptedProps = {
   authenticateUser: (token: string) => void,
   token: string | null,
 }
+
+let emailRegex = /[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,}/;
+let passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&*()\-+=^_]).{8,20}$/;
 
 class RegisterComponent extends Component<AcceptedProps, RegisterState> {
   constructor(props: AcceptedProps) {
@@ -80,22 +84,59 @@ class RegisterComponent extends Component<AcceptedProps, RegisterState> {
       )
     } else {
       return(
-        <div>
-          <form onSubmit={this.onRegisterSubmit}>
-            <h2>Register</h2>
-            <label htmlFor="registerEmail">Email</label>
-            <input type="email" id="registerEmail" value={this.state.email} onChange={this.updateEmail} />
+        <Container className="authContainer" maxWidth={false}>
+          <Paper className="authForm" elevation={5}>
+            <form onSubmit={this.onRegisterSubmit}>
+              <h2>Register</h2>
+              <TextField
+                id="registerEmail"
+                label="Email"
+                variant="filled"
+                type="email"
+                value={this.state.email}
+                onChange={this.updateEmail}
+                margin="normal"
+                error={!emailRegex.test(this.state.email) && this.state.email !== ""}
+                helperText="Please enter a valid email address"
+                fullWidth={true}
+                />
 
-            <label htmlFor="registerPassword">Password</label>
-            <input type="password" id="registerPassword" value={this.state.password} onChange={this.updatePassword} />
+              <TextField
+                id="registerPassword"
+                label="Password"
+                variant="filled"
+                type="password"
+                value={this.state.password}
+                onChange={this.updatePassword}
+                margin="normal"
+                error={!passwordRegex.test(this.state.password) &&  this.state.password !== ""}
+                helperText="Password must include uppercase, lowercase, number, & special character"
+                fullWidth={true}
+                />
 
-            <label htmlFor="registerPasswordConfirm">Confirm Password</label>
-            <input type="password" id="registerPasswordConfirm" value={this.state.passwordConfirm} onChange={this.updatePasswordConfirm} />
+              <TextField
+                id="registerPasswordConfirm"
+                label="Confirm Password"
+                variant="filled"
+                type="password"
+                value={this.state.passwordConfirm}
+                onChange={this.updatePasswordConfirm}
+                margin="normal"
+                error={this.state.password !== this.state.passwordConfirm && this.state.passwordConfirm !== ""}
+                helperText="Passwords must match"
+                fullWidth={true}
+                />
 
-            <button type="submit">Register</button>
-          </form>
-          <p>Already have an account? <Link to="/login">Sign in here</Link></p>
-        </div>
+              <Button
+              type="submit"
+              disabled={!emailRegex.test(this.state.email) || this.state.password !== this.state.passwordConfirm}
+              >
+                Register
+              </Button>
+            </form>
+            <p>Already have an account? <Link to="/login">Sign in here</Link></p>
+          </Paper>
+        </Container>
       )
     }
   }

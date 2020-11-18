@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import { Paper, Container, TextField, Button } from '@material-ui/core';
 
 type LoginState = {
   email: string,
@@ -67,19 +68,40 @@ class LoginComponent extends Component<AcceptedProps, LoginState> {
       )
     } else {
       return(
-        <div>
-          <form onSubmit={this.onLoginSubmit}>
-            <h2>Login</h2>
-            <label htmlFor="loginEmail">Email</label>
-            <input type="email" id="loginEmail" value={this.state.email} onChange={this.updateEmail}/>
+        <Container className="authContainer" maxWidth={false}>
+          <Paper className="authForm" elevation={5}>
+            <form onSubmit={this.onLoginSubmit}>
+              <h2>Login</h2>
+              <TextField
+              id="loginEmail"
+              label="Email"
+              variant="filled"
+              type="email"
+              value={this.state.email}
+              onChange={this.updateEmail}
+              margin="normal"
+              fullWidth={true}
+              />
+              <TextField
+              id="loginPassword"
+              label="Password"
+              variant="filled"
+              type="password"
+              value={this.state.password}
+              onChange={this.updatePassword}
+              margin="normal"
+              fullWidth={true}
+              />
 
-            <label htmlFor="loginPassword">Password</label>
-            <input type="password" id="loginPassword" value={this.state.password} onChange={this.updatePassword}/>
-
-            <button type="submit">Login</button>
-          </form>
-          <p>Need to create an account? <Link to="/register">Register here</Link></p>
-        </div>
+              <Button 
+              type="submit" 
+              disabled={!this.state.email || !this.state.password}
+              color="inherit"
+              >Login</Button>
+            </form>
+            <p>Need to create an account? <Link to="/register">Register here</Link></p>
+          </Paper>
+        </Container>
       )
     }
   }
