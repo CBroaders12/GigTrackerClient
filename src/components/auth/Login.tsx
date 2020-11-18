@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 type LoginState = {
   email: string,
@@ -78,6 +78,7 @@ class LoginComponent extends Component<AcceptedProps, LoginState> {
 
             <button type="submit">Login</button>
           </form>
+          <p>Need to create an account? <Link to="/register">Register here</Link></p>
         </div>
       )
     }

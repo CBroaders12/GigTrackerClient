@@ -7,7 +7,6 @@ import RegisterComponent from './components/auth/Register';
 import NavigationComponent from './components/app/Navigation';
 import MainPageComponent from './components/app/main/MainPageComponent';
 import MusicPageComponent from './components/app/MusicPage';
-import GigPageComponent from './components/app/GigPage';
 
 type AppState = {
   token: string | null,
@@ -44,7 +43,7 @@ class App extends React.Component<{}, AppState> {
               <LoginComponent authenticateUser={this.authenticateUser} token={this.state.token} />
             </Route>
             <Route exact path="/register">
-              <RegisterComponent authenticateUser={this.authenticateUser} />
+              <RegisterComponent authenticateUser={this.authenticateUser} token={this.state.token}/>
             </Route>
             <Route exact path="/">
               <MainPageComponent />

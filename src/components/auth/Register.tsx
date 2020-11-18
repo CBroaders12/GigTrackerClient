@@ -1,4 +1,5 @@
-import React, { Component, ReactPropTypes } from 'react';
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 type RegisterState = {
   email: string,
@@ -8,6 +9,7 @@ type RegisterState = {
 
 type AcceptedProps = {
   authenticateUser: (token: string) => void,
+  token: string | null,
 }
 
 class RegisterComponent extends Component<AcceptedProps, RegisterState> {
@@ -72,23 +74,30 @@ class RegisterComponent extends Component<AcceptedProps, RegisterState> {
   }
 
   render() {
-    return(
-      <div>
-        <form onSubmit={this.onRegisterSubmit}>
-          <h2>Register</h2>
-          <label htmlFor="registerEmail">Email</label>
-          <input type="email" id="registerEmail" value={this.state.email} onChange={this.updateEmail} />
+    if (this.props.token) {
+      return(
+        <Redirect to="/" />
+      )
+    } else {
+      return(
+        <div>
+          <form onSubmit={this.onRegisterSubmit}>
+            <h2>Register</h2>
+            <label htmlFor="registerEmail">Email</label>
+            <input type="email" id="registerEmail" value={this.state.email} onChange={this.updateEmail} />
 
-          <label htmlFor="registerPassword">Password</label>
-          <input type="password" id="registerPassword" value={this.state.password} onChange={this.updatePassword} />
+            <label htmlFor="registerPassword">Password</label>
+            <input type="password" id="registerPassword" value={this.state.password} onChange={this.updatePassword} />
 
-          <label htmlFor="registerPasswordConfirm">Confirm Password</label>
-          <input type="password" id="registerPasswordConfirm" value={this.state.passwordConfirm} onChange={this.updatePasswordConfirm} />
+            <label htmlFor="registerPasswordConfirm">Confirm Password</label>
+            <input type="password" id="registerPasswordConfirm" value={this.state.passwordConfirm} onChange={this.updatePasswordConfirm} />
 
-          <button type="submit">Register</button>
-        </form>
-      </div>
-    )
+            <button type="submit">Register</button>
+          </form>
+          <p>Already have an account? <Link to="/login">Sign in here</Link></p>
+        </div>
+      )
+    }
   }
 }
 
