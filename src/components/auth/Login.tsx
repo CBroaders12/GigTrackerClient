@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 type LoginState = {
   email: string,
@@ -7,6 +8,7 @@ type LoginState = {
 
 type AcceptedProps = {
   authenticateUser: (token: string) => void,
+  token: string | null,
 }
 
 class LoginComponent extends Component<AcceptedProps, LoginState> {
@@ -59,20 +61,26 @@ class LoginComponent extends Component<AcceptedProps, LoginState> {
   }
 
   render() {
-    return(
-      <div>
-        <form onSubmit={this.onLoginSubmit}>
-          <h2>Login</h2>
-          <label htmlFor="loginEmail">Email</label>
-          <input type="email" id="loginEmail" value={this.state.email} onChange={this.updateEmail}/>
+    if (this.props.token) {
+      return(
+        <Redirect to="/" />
+      )
+    } else {
+      return(
+        <div>
+          <form onSubmit={this.onLoginSubmit}>
+            <h2>Login</h2>
+            <label htmlFor="loginEmail">Email</label>
+            <input type="email" id="loginEmail" value={this.state.email} onChange={this.updateEmail}/>
 
-          <label htmlFor="loginPassword">Password</label>
-          <input type="password" id="loginPassword" value={this.state.password} onChange={this.updatePassword}/>
+            <label htmlFor="loginPassword">Password</label>
+            <input type="password" id="loginPassword" value={this.state.password} onChange={this.updatePassword}/>
 
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    )
+            <button type="submit">Login</button>
+          </form>
+        </div>
+      )
+    }
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 class GigPageComponent extends Component<{/* props */}, {/* state */}> {
   constructor(props: any /* TODO: Update this */) {
@@ -6,11 +7,18 @@ class GigPageComponent extends Component<{/* props */}, {/* state */}> {
   }
 
   render() {
-    return(
-      <div>
 
-      </div>
-    )
+    if (localStorage.getItem('sessionToken')) {
+      return(
+        <div>
+          <h1>Welcome to the Gig Page</h1>
+        </div>
+      )
+    } else {
+      return(
+        <Redirect to="/login"/>
+      )
+    }
   }
 }
 

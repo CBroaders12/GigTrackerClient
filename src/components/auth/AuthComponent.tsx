@@ -14,7 +14,7 @@ class AuthComponent extends Component<AcceptedProps, {/* state */}> {
   render() {
     return(
       <div>
-        <LoginComponent authenticateUser={this.props.authenticateUser}/>
+        {/* <LoginComponent authenticateUser={this.props.authenticateUser}/> */}
         <RegisterComponent authenticateUser={this.props.authenticateUser}/>
       </div>
     )
