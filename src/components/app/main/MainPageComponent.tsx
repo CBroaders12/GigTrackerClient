@@ -10,7 +10,7 @@ type MainProps = {
 }
 
 class MainPageComponent extends Component<MainProps, {/* state */}> {
-  constructor(props: any /* TODO: Update this */) {
+  constructor(props: MainProps) {
     super(props);
   }
 
