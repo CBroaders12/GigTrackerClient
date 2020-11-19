@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-class GigList extends Component<{/* props */}, {/* state */}> {
+type GigListProps = {
+
+}
+
+class GigList extends Component<GigListProps, {/* state */}> {
   constructor(props: any /* TODO: Update this */) {
     super(props);
   }

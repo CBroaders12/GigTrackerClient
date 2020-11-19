@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-class MusicPreview extends Component<{/* props */}, {/* state */}> {
+type PreviewProps = {
+  token: string | null,
+}
+
+class MusicPreview extends Component<PreviewProps, {/* state */}> {
   constructor(props: any /* TODO: Update this */) {
     super(props);
   }

@@ -5,7 +5,11 @@ import { Grid } from '@material-ui/core'
 import MusicPreview from './MusicPreview';
 import GigList from './GigList';
 
-class MainPageComponent extends Component<{/* props */}, {/* state */}> {
+type MainProps = {
+  token: string | null;
+}
+
+class MainPageComponent extends Component<MainProps, {/* state */}> {
   constructor(props: any /* TODO: Update this */) {
     super(props);
   }
@@ -19,7 +23,7 @@ class MainPageComponent extends Component<{/* props */}, {/* state */}> {
             <h1>Welcome to the main page</h1>
           </Grid>
           <Grid item xs={4}>
-            <MusicPreview />
+            <MusicPreview token={this.props.token}/>
           </Grid>
           <Grid item xs={8}>
             <GigList />

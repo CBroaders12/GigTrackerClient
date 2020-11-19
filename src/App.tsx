@@ -55,7 +55,7 @@ class App extends React.Component<{}, AppState> {
               <RegisterComponent authenticateUser={this.authenticateUser} token={this.state.token}/>
             </Route>
             <Route exact path="/">
-              <MainPageComponent />
+              <MainPageComponent token={this.state.token}/>
             </Route>
             <Route exact path="/music">
               <MusicPageComponent />
