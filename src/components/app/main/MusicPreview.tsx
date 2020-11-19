@@ -8,7 +8,7 @@ class MusicPreview extends Component<{/* props */}, {/* state */}> {
   render() {
     return(
       <div>
-
+        <h2>Music Preview Component</h2>
       </div>
     )
   }

@@ -8,7 +8,7 @@ class GigList extends Component<{/* props */}, {/* state */}> {
   render() {
     return(
       <div>
-
+        <h2>Gig List Component</h2>
       </div>
     )
   }
