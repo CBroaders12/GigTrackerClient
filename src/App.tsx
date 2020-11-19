@@ -7,6 +7,7 @@ import RegisterComponent from './components/auth/Register';
 import NavigationComponent from './components/app/Navigation';
 import MainPageComponent from './components/app/main/MainPageComponent';
 import MusicPageComponent from './components/app/MusicPage';
+import Footer from './components/app/Footer';
 
 type AppState = {
   token: string | null,
@@ -60,6 +61,7 @@ class App extends React.Component<{}, AppState> {
               <MusicPageComponent />
             </Route>
           </Switch>
+          <Footer />
         </BrowserRouter>
       </div>
     );

@@ -7,11 +7,11 @@
 }
 
 .authContainer {
-  height: 95vh;
+  height: 85vh;
   background: url('./images/mainBackground.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  padding-top: 15%; 
+  padding-top: 5%; 
 }
 
 .navBar {
@@ -23,4 +23,8 @@
   max-width: 500px;
   margin: auto;
   padding: 3rem;
+}
+
+#footer {
+  background-color: white;
 }
