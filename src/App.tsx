@@ -11,7 +11,7 @@ import Footer from './components/app/Footer';
 
 type AppState = {
   token: string | null,
-  isLoggedIn: boolean,
+  isMusicModalOpen: boolean,
 }
 
 class App extends React.Component<{}, AppState> {
@@ -20,18 +20,19 @@ class App extends React.Component<{}, AppState> {
     super(props);
     this.state = {
       token: localStorage.getItem('sessionToken'),
-      isLoggedIn: false,
+      isMusicModalOpen: false,
     }
 
     this.authenticateUser = this.authenticateUser.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleMusicModalOpen = this.handleMusicModalOpen.bind(this);
+    this.handleMusicModalClose = this.handleMusicModalClose.bind(this);
   }
   
   authenticateUser(token: string): void {
     localStorage.setItem('sessionToken', token);
     this.setState({
       token: token,
-      isLoggedIn: true,
     });
   }
 
@@ -42,20 +43,43 @@ class App extends React.Component<{}, AppState> {
     })
   }
 
+  handleMusicModalOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    this.setState({
+      isMusicModalOpen: true,
+    })
+  }
+  
+  handleMusicModalClose(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    this.setState({
+      isMusicModalOpen: false,
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <BrowserRouter>
-          <NavigationComponent token={this.state.token} handleLogout={this.handleLogout}/>
+          <NavigationComponent
+            token={this.state.token}
+            handleLogout={this.handleLogout}/>
           <Switch>
             <Route exact path="/login">
-              <LoginComponent authenticateUser={this.authenticateUser} token={this.state.token} />
+              <LoginComponent
+                authenticateUser={this.authenticateUser}
+                token={this.state.token} />
             </Route>
             <Route exact path="/register">
-              <RegisterComponent authenticateUser={this.authenticateUser} token={this.state.token}/>
+              <RegisterComponent
+                authenticateUser={this.authenticateUser}
+                token={this.state.token}/>
             </Route>
             <Route exact path="/">
-              <MainPageComponent token={this.state.token}/>
+              <MainPageComponent
+                token={this.state.token}
+                isMusicModalOpen={this.state.isMusicModalOpen}
+                handleMusicModalClose={this.handleMusicModalClose}
+                handleMusicModalOpen={this.handleMusicModalOpen}
+                />
             </Route>
             <Route exact path="/music">
               <MusicPageComponent />

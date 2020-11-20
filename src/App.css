@@ -39,3 +39,14 @@
   background: rgb(0, 167, 0) !important;
   margin: 1rem !important;
 }
+
+#newMusicModal {
+  max-width: 500px;
+  height: 100%;
+  margin: 5rem auto;
+  outline: 0;
+}
+
+#newMusicModal .MuiPaper-root form {
+  padding: 1rem, 2.5rem !important;
+}

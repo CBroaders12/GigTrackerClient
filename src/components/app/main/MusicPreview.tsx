@@ -5,6 +5,7 @@ import { Add } from '@material-ui/icons';
 
 type PreviewProps = {
   token: string | null,
+  handleOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 }
 
 type PreviewState = {
@@ -70,6 +71,7 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
           variant="contained"
           size="large"
           startIcon={<Add />}
+          onClick={this.props.handleOpen}
         >
           Add Music
         </Button>

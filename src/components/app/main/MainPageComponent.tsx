@@ -4,9 +4,13 @@ import { Grid } from '@material-ui/core'
 
 import MusicPreview from './MusicPreview';
 import GigList from './GigList';
+import NewMusicModal from '../modals/NewMusicModal'
 
 type MainProps = {
   token: string | null;
+  isMusicModalOpen: boolean,
+  handleMusicModalOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  handleMusicModalClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
 class MainPageComponent extends Component<MainProps, {/* state */}> {
@@ -18,17 +22,25 @@ class MainPageComponent extends Component<MainProps, {/* state */}> {
 
     if (localStorage.getItem('sessionToken')) {
       return(
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <h1>Welcome to the main page</h1>
+        <>
+          <Grid container spacing={1}>
+            <Grid item xs={4}>
+              <MusicPreview
+                token={this.props.token}
+                handleOpen={this.props.handleMusicModalOpen}
+              />
+            </Grid>
+            <Grid item xs={8}>
+              <GigList />
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <MusicPreview token={this.props.token}/>
-          </Grid>
-          <Grid item xs={8}>
-            <GigList />
-          </Grid>
-        </Grid>
+          <NewMusicModal
+            isOpen={this.props.isMusicModalOpen}
+            handleOpen={this.props.handleMusicModalOpen}
+            handleClose={this.props.handleMusicModalClose}
+            token={this.props.token}
+          />
+        </>
       )
     } else {
       return(
