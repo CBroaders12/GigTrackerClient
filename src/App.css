@@ -30,6 +30,12 @@
 }
 
 .previewCard {
-  margin: 1rem 0;
+  margin: 1rem 2rem;
   text-align: left;
+}
+
+.addButton {
+  color: white;
+  background: rgb(0, 167, 0) !important;
+  margin: 1rem !important;
 }
