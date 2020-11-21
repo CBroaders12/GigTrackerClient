@@ -24,13 +24,13 @@ class MainPageComponent extends Component<MainProps, {/* state */}> {
       return(
         <>
           <Grid container spacing={1}>
-            <Grid item xs={4}>
+            <Grid item xs={4} id="musicPreview">
               <MusicPreview
                 token={this.props.token}
                 handleOpen={this.props.handleMusicModalOpen}
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={8} id="gigList">
               <GigList token={this.props.token}/>
             </Grid>
           </Grid>

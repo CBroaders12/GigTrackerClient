@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Card, CardContent, CardHeader, Typography } from '@material-ui/core';
+import { Box, Card, CardContent, Typography } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import { green } from '@material-ui/core/colors';
 
@@ -37,15 +37,14 @@ class GigList extends Component<GigListProps, GigState> {
   }
 
   render() {
-    console.log(this.state.gigEntries)
     return(
-      <div>
-        <h2>Your Gigs</h2>
+      <>
+        <Typography component="h2" variant="h4">Your Gigs</Typography>
         <Box display="flex" flexWrap="wrap">
           {
             this.state.gigEntries.map(gig => {
               return(
-                <Card key={gig.id} className="gigCard">
+                <Card key={gig.id} className="gigCard" elevation={4}>
                   <CardContent>
                     <Typography component="h5" variant="h5">{gig.name}</Typography >
                   </CardContent>
@@ -53,14 +52,14 @@ class GigList extends Component<GigListProps, GigState> {
               )
             })
           }
-          <Card className="gigCard">
+          <Card className="gigCard" elevation={4}>
             <CardContent>
-              <Add style={{ color: green[500], fontSize: 120}}/>
+              <Add style={{ color: green[500], fontSize: 120 }}/>
               <Typography>Add a Gig</Typography>
             </CardContent>
           </Card>
         </Box>
-      </div>
+      </>
     )
   }
 }

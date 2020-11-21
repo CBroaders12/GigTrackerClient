@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardContent, Button } from '@material-ui/core';
+import { Card, CardContent, Button, Typography} from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 
 type PreviewProps = {
@@ -38,19 +38,19 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
 
   render() {
     // Only display the first five music entries in the preview
-    let previewEntries = this.state.musicEntries.length < 5
+    let previewEntries = this.state.musicEntries.length < 6
       ? this.state.musicEntries
-      : this.state.musicEntries.slice(0, 5);
+      : this.state.musicEntries.slice(0, 6);
 
     return(
       <>
-        <h2>Your Music</h2>
+        <Typography component="h2" variant="h4">Your Music</Typography>
         {previewEntries.map(piece => {
           return(
             <Card elevation={5} className="previewCard" key={piece.id}>
               <CardContent>
-                <h3>{piece.title}</h3>
-                <h4>{piece.artist}</h4>
+                <Typography component="h3" variant="h6" noWrap>{piece.title}</Typography>
+                <Typography component="h4" variant="subtitle1">{piece.artist}</Typography>
               </CardContent>
             </Card>
           )
