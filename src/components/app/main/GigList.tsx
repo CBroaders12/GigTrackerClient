@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Box, Card, CardContent, Typography } from '@material-ui/core';
+import { Box, Card, CardContent, Typography, IconButton } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
-import { green } from '@material-ui/core/colors';
 
 type GigListProps = {
   token: string | null,
+  handleOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 }
 
 type GigState = {
@@ -52,10 +52,17 @@ class GigList extends Component<GigListProps, GigState> {
               )
             })
           }
-          <Card className="gigCard" elevation={4}>
+          <Card className="gigCard" id="addGigCard" elevation={4}>
             <CardContent>
-              <Add style={{ color: green[500], fontSize: 120 }}/>
-              <Typography>Add a Gig</Typography>
+              <Typography component="h4" variant="h5">New Gig</Typography>
+              <IconButton
+              id="addGigButton"
+              className="addButton"
+              onClick={this.props.handleOpen}
+              size="medium"
+              >
+                <Add />
+              </IconButton>
             </CardContent>
           </Card>
         </Box>

@@ -4,7 +4,8 @@ import { Grid } from '@material-ui/core'
 
 import MusicPreview from './MusicPreview';
 import GigList from './GigList';
-import NewMusicModal from '../modals/NewMusicModal'
+import NewMusicModal from '../modals/NewMusicModal';
+import NewGigModal from '../modals/NewGigModal';
 
 type MainProps = {
   token: string | null;
@@ -13,9 +14,32 @@ type MainProps = {
   handleMusicModalClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-class MainPageComponent extends Component<MainProps, {/* state */}> {
+type MainState = {
+  isGigModalOpen: boolean,
+}
+
+class MainPageComponent extends Component<MainProps, MainState> {
   constructor(props: MainProps) {
     super(props);
+
+    this.state = {
+      isGigModalOpen: false,
+    }
+
+    this.handleGigModalOpen = this.handleGigModalOpen.bind(this);
+    this.handleGigModalClose = this.handleGigModalClose.bind(this);
+  }
+
+  handleGigModalOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    this.setState({
+      isGigModalOpen: true,
+    });
+  }
+  
+  handleGigModalClose(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    this.setState({
+      isGigModalOpen: false,
+    });
   }
 
   render() {
@@ -31,13 +55,22 @@ class MainPageComponent extends Component<MainProps, {/* state */}> {
               />
             </Grid>
             <Grid item xs={8} id="gigList">
-              <GigList token={this.props.token}/>
+              <GigList
+                token={this.props.token}
+                handleOpen={this.handleGigModalOpen}
+              />
             </Grid>
           </Grid>
           <NewMusicModal
             isOpen={this.props.isMusicModalOpen}
             handleOpen={this.props.handleMusicModalOpen}
             handleClose={this.props.handleMusicModalClose}
+            token={this.props.token}
+          />
+          <NewGigModal
+            isOpen={this.state.isGigModalOpen}
+            handleOpen={this.handleGigModalOpen}
+            handleClose={this.handleGigModalClose}
             token={this.props.token}
           />
         </>

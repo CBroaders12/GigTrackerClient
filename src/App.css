@@ -51,7 +51,8 @@
   margin: 1rem !important;
 }
 
-#newMusicModal {
+#newMusicModal,
+#newGigModal {
   max-width: 500px;
   height: 100%;
   margin: 5rem auto;
@@ -67,4 +68,10 @@
   min-width: 200px;
   height: 200px;
   margin: 1rem;
+}
+
+#addGigButton {
+  margin-top: 36px !important;
+  height: 64px;
+  width: 64px;
 }
