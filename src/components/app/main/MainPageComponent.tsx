@@ -31,7 +31,7 @@ class MainPageComponent extends Component<MainProps, {/* state */}> {
               />
             </Grid>
             <Grid item xs={8}>
-              <GigList />
+              <GigList token={this.props.token}/>
             </Grid>
           </Grid>
           <NewMusicModal

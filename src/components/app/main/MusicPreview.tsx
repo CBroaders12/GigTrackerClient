@@ -27,7 +27,7 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
       headers: new Headers({
         'Content-Type': 'application/json',
         Authorization: this.props.token ? this.props.token : "",
-      })
+      }),
     });
 
     let resultsJSON = await musicResponse.json();
@@ -41,8 +41,6 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
     let previewEntries = this.state.musicEntries.length < 5
       ? this.state.musicEntries
       : this.state.musicEntries.slice(0, 5);
-    
-    console.log(previewEntries);
 
     return(
       <>
