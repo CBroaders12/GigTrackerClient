@@ -36,11 +36,11 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
 
     let parsedResponse = await response.json();
 
-    console.log(parsedResponse);
-
     this.setState({
       musicList: parsedResponse.targetGig ? parsedResponse.targetGig.music : [], //Catch if user tries to navigate to the page without selecting a gig
     })
+
+    console.log(this.state.musicList);
   }
 
   //TODO: componentWillUnmount
@@ -49,8 +49,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     if (this.props.gigInfo.id) { //Only display the page if there is a chosen gig
       return(
         <div>
-          <h1>Welcome to the Gig Page</h1>
-          <h2>{this.props.gigInfo.name}</h2>
+          <h1>{this.props.gigInfo.name}</h1>
         </div>
       )
     } else {
