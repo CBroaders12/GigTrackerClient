@@ -7,11 +7,18 @@ import GigList from './GigList';
 import NewMusicModal from '../modals/NewMusicModal';
 import NewGigModal from '../modals/NewGigModal';
 
+type GigInfo = {
+  id: number | null,
+  name: string,
+  date: string,
+}
+
 type MainProps = {
   token: string | null;
   isMusicModalOpen: boolean,
   handleMusicModalOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-  handleMusicModalClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  handleMusicModalClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  chooseGig: (gigDetails: GigInfo) => void,
 }
 
 type MainState = {
@@ -58,6 +65,7 @@ class MainPageComponent extends Component<MainProps, MainState> {
               <GigList
                 token={this.props.token}
                 handleOpen={this.handleGigModalOpen}
+                chooseGig={this.props.chooseGig}
               />
             </Grid>
           </Grid>

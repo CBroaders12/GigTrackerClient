@@ -7,11 +7,19 @@ import RegisterComponent from './components/auth/Register';
 import NavigationComponent from './components/app/Navigation';
 import MainPageComponent from './components/app/main/MainPageComponent';
 import MusicPageComponent from './components/app/MusicPage';
+import GigPageComponent from './components/app/GigPage';
 import Footer from './components/app/Footer';
+
+type GigInfo = {
+  id: number | null,
+  name: string,
+  date: string
+}
 
 type AppState = {
   token: string | null,
   isMusicModalOpen: boolean,
+  gigInfo: GigInfo,
 }
 
 class App extends React.Component<{}, AppState> {
@@ -21,12 +29,14 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       token: localStorage.getItem('sessionToken'),
       isMusicModalOpen: false,
+      gigInfo: {id: null, name: "", date: ""}
     }
 
     this.authenticateUser = this.authenticateUser.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleMusicModalOpen = this.handleMusicModalOpen.bind(this);
     this.handleMusicModalClose = this.handleMusicModalClose.bind(this);
+    this.chooseGig = this.chooseGig.bind(this);
   }
   
   authenticateUser(token: string): void {
@@ -40,19 +50,29 @@ class App extends React.Component<{}, AppState> {
     localStorage.removeItem('sessionToken');
     this.setState({
       token: null,
-    })
+    });
   }
 
   handleMusicModalOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     this.setState({
       isMusicModalOpen: true,
-    })
+    });
   }
   
   handleMusicModalClose(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     this.setState({
       isMusicModalOpen: false,
-    })
+    });
+  }
+
+  chooseGig(gigDetails: GigInfo): void {
+    this.setState({
+      gigInfo: {
+        id: gigDetails.id,
+        name: gigDetails.name,
+        date: gigDetails.date
+      }
+    });
   }
 
   render() {
@@ -79,10 +99,17 @@ class App extends React.Component<{}, AppState> {
                 isMusicModalOpen={this.state.isMusicModalOpen}
                 handleMusicModalClose={this.handleMusicModalClose}
                 handleMusicModalOpen={this.handleMusicModalOpen}
+                chooseGig={this.chooseGig}
                 />
             </Route>
             <Route exact path="/music">
               <MusicPageComponent />
+            </Route>
+            <Route exact path="/gig">
+              <GigPageComponent
+              gigInfo={this.state.gigInfo}
+              token={this.state.token}
+              />
             </Route>
           </Switch>
           <Footer />

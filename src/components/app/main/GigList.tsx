@@ -2,13 +2,23 @@ import React, { Component } from 'react';
 import { Box, Card, CardContent, Typography, IconButton } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 
+import GigCard from './GigCard';
+
+// Create a type for the relevant information from the fetch
+type GigInfo = {
+  id: number,
+  name: string,
+  date: string,
+}
+
 type GigListProps = {
   token: string | null,
   handleOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  chooseGig: (gigDetails: GigInfo) => void,
 }
 
 type GigState = {
-  gigEntries: Array<any>
+  gigEntries: Array<GigInfo>
 }
 
 class GigList extends Component<GigListProps, GigState> {
@@ -44,11 +54,11 @@ class GigList extends Component<GigListProps, GigState> {
           {
             this.state.gigEntries.map(gig => {
               return(
-                <Card key={gig.id} className="gigCard" elevation={4}>
-                  <CardContent>
-                    <Typography component="h5" variant="h5">{gig.name}</Typography >
-                  </CardContent>
-                </Card>
+                <GigCard
+                key={gig.id}
+                gigInfo={gig}
+                chooseGig={this.props.chooseGig}
+                />
               )
             })
           }
