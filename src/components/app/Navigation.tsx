@@ -23,7 +23,7 @@ class NavigationComponent extends Component<NavbarProps, {/* state */}> {
             { this.props.token 
               ? <>
                   <Link to="/"><Button >Home</Button></Link>
-                  <Button  onClick={this.props.handleLogout}>Logout</Button>
+                  <Link to="/login"><Button  onClick={this.props.handleLogout}>Logout</Button></Link>
                 </>
               : <>
                   <Link to="/login"><Button >Login</Button></Link>

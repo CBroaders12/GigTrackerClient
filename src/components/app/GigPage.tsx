@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+import { Container, Button, Card, CardContent } from '@material-ui/core';
+
 type GigInfo = {
   id: number | null,
   name: string,
@@ -39,8 +41,6 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     this.setState({
       musicList: parsedResponse.targetGig ? parsedResponse.targetGig.music : [], //Catch if user tries to navigate to the page without selecting a gig
     })
-
-    console.log(this.state.musicList);
   }
 
   //TODO: componentWillUnmount
@@ -48,9 +48,26 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
   render() {
     if (this.props.gigInfo.id) { //Only display the page if there is a chosen gig
       return(
-        <div>
+        <Container maxWidth="sm" >
           <h1>{this.props.gigInfo.name}</h1>
-        </div>
+          <Button color="primary" variant="contained">Add Song</Button>
+            {
+              this.state.musicList.map(piece => {
+                return(
+                  <Card key={piece.id} elevation={2} square>
+                    <CardContent>
+                      <h4>{piece.title}</h4>
+                      <h5>{piece.artist}</h5>
+                      <h6>Notes:</h6>
+                      <p>{piece.set.notes}</p>
+                      {/* <Button variant="outlined">Update Notes</Button> */ /* TODO: add endpoint in server to do this */} 
+                      <Button variant="outlined" color="secondary">Remove Song</Button>
+                    </CardContent>
+                  </Card>
+                )
+              })
+            }
+        </Container>
       )
     } else {
       return(
