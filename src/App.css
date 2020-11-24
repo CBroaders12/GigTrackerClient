@@ -15,7 +15,7 @@
 }
 
 .navBar {
-  background-color: red;
+  /* background: rgb(0, 132, 184) !important; */
 }
 
 .authForm {
@@ -74,4 +74,17 @@
   margin-top: 36px !important;
   height: 64px;
   width: 64px;
+}
+
+.gigMusicCard {
+  width: 300px;
+  border: grey solid 1px;
+}
+
+#gigRepBox {
+  height: 75vh;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  align-items: flex-start;
 }
