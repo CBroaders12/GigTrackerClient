@@ -78,13 +78,15 @@
 
 .gigMusicCard {
   width: 300px;
+  height: 300px;
   border: grey solid 1px;
 }
 
 #gigRepBox {
-  height: 75vh;
-  overflow-y: scroll;
+  height: 605px;
+  overflow-x: scroll;
   flex-wrap: wrap;
   margin-top: 2rem;
-  align-items: flex-start;
+  align-content: flex-start;
+  background: rgb(226, 226, 226)
 }
