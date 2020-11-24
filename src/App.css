@@ -90,3 +90,7 @@
   align-content: flex-start;
   background: rgb(226, 226, 226)
 }
+
+.gigMusicButton {
+  margin: 0.5rem 0 !important;
+}

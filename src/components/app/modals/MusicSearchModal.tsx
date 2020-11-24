@@ -77,20 +77,20 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
   render() {
     return(
       <Modal
-        id="newGigModal"
-        open={this.props.isOpen}
-        onClose={this.props.closeModal}
+      id="newGigModal"
+      open={this.props.isOpen}
+      onClose={this.props.closeModal}
       >
         <Paper>
           <h2>Add New Music</h2>
           <form onSubmit={this.handleSubmit}>
             <Select
-              id="musicSelect"
-              label="Your Music"
-              variant="filled"
-              value={this.state.musicId}
-              fullWidth={true}
-              onChange={this.updateMusicId}
+            id="musicSelect"
+            label="Your Music"
+            variant="filled"
+            value={this.state.musicId}
+            fullWidth={true}
+            onChange={this.updateMusicId}
             >
               <MenuItem value={undefined}>---</MenuItem>
               {
@@ -102,24 +102,24 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
               }
             </Select>
             <TextField
-              id="musicSelectNotes"
-              label="Notes"
-              variant="filled"
-              type="text"
-              multiline
-              rowsMax={4}
-              margin="normal"
-              fullWidth={true}
-              value={this.state.notes}
-              onChange={this.updateNotes}
+            id="musicSelectNotes"
+            label="Notes"
+            variant="filled"
+            type="text"
+            multiline
+            rowsMax={4}
+            margin="normal"
+            fullWidth={true}
+            value={this.state.notes}
+            onChange={this.updateNotes}
             />
             <Button
-              className="addButton"
-              variant="contained"
-              size="large"
-              startIcon={<Add />}
-              type="submit"
-              >
+            className="addButton"
+            variant="contained"
+            size="large"
+            startIcon={<Add />}
+            type="submit"
+            >
               Add Song
             </Button>
           </form>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { Container, Box, Button, Card, CardContent } from '@material-ui/core';
+import { Container, Box, Button, Card, CardContent, Typography } from '@material-ui/core';
 import { Add, Delete, Edit } from '@material-ui/icons';
 
 import MusicSearchModal from './modals/MusicSearchModal';
+import UpdateGigModal from './modals/UpdateGigModal';
 
 type GigInfo = {
   id: number | null,
@@ -20,6 +21,7 @@ type GigPageProps = {
 type GigPageState = {
   musicList: Array<any>,
   isAddMusicModalOpen: boolean,
+  isUpdateGigModalOpen: boolean,
 }
 
 class GigPageComponent extends Component<GigPageProps, GigPageState> {
@@ -29,11 +31,13 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     this.state = {
       musicList: [],
       isAddMusicModalOpen: false,
+      isUpdateGigModalOpen: false,
     }
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.handleOpen = this.handleOpen.bind(this);
+    this.openAddSongModal = this.openAddSongModal.bind(this);
+    this.closeAddSongModal = this.closeAddSongModal.bind(this);
+    this.openUpdateGigModal = this.openUpdateGigModal.bind(this);
+    this.closeUpdateGigModal = this.closeUpdateGigModal.bind(this);
     this.handleMusicDelete = this.handleMusicDelete.bind(this);
     this.handleGigDelete = this.handleGigDelete.bind(this);
   }
@@ -56,20 +60,28 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     }
   }
 
-  openModal(): void {
+  openAddSongModal(): void {
     this.setState({
       isAddMusicModalOpen: true,
     })
   }
 
-  closeModal(): void {
+  closeAddSongModal(): void {
     this.setState({
       isAddMusicModalOpen: false,
     })
   }
 
-  handleOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    this.openModal();
+  openUpdateGigModal(): void {
+    this.setState({
+      isUpdateGigModalOpen: true
+    })
+  }
+
+  closeUpdateGigModal(): void {
+    this.setState({
+      isUpdateGigModalOpen: false
+    })
   }
 
   async handleGigDelete() {
@@ -104,7 +116,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
           color="primary"
           variant="contained"
           startIcon={<Edit />}
-          // onClick={this.handleOpen}
+          onClick={() => this.openUpdateGigModal()}
           >
             Edit Gig
           </Button>
@@ -113,7 +125,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
           color="primary"
           variant="contained"
           startIcon={<Add />}
-          onClick={() => this.openModal()}
+          onClick={() => this.openAddSongModal()}
           >
             Add Song
           </Button>
@@ -129,28 +141,32 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
             {
               this.state.musicList.map(piece => {
                 return(
-                  <Card key={piece.id} elevation={2} square className="gigMusicCard">
+                  <Card key={piece.id} elevation={0} square className="gigMusicCard">
                     <CardContent>
-                      <h4>{piece.title}</h4>
-                      <h5>{piece.artist}</h5>
-                      <h6>Notes:</h6>
-                      <p>{piece.set.notes}</p> 
-                      <Button
-                      variant="outlined"
-                      color="primary"
-                      startIcon={<Edit />}
-                      // onClick={() => this.handleMusicDelete(piece.id)}
-                      >
-                        Edit Notes
-                      </Button>
-                      <Button
-                      variant="outlined"
-                      color="secondary"
-                      startIcon={<Delete />}
-                      onClick={() => this.handleMusicDelete(piece.id)}
-                      >
-                        Remove Song
-                      </Button>
+                      <Typography component="h4" variant="h5" gutterBottom>{piece.title}</Typography>
+                      <Typography component="h5" variant="subtitle1" gutterBottom>{piece.artist}</Typography>
+                      <Typography component="h6" variant="subtitle2" align="left" style={{textDecoration: "underline"}}>Notes:</Typography>
+                      <Typography component="p" align="left" gutterBottom>{piece.set.notes}</Typography> 
+                      <Box style={{padding: '1rem'}}>
+                        <Button
+                        className="gigMusicButton"
+                        variant="outlined"
+                        color="primary"
+                        startIcon={<Edit />}
+                        // onClick={() => this.handleNoteUpdate(piece.id)}
+                        >
+                          Edit Notes
+                        </Button>
+                        <Button
+                        className="gigMusicButton"
+                        variant="outlined"
+                        color="secondary"
+                        startIcon={<Delete />}
+                        onClick={() => this.handleMusicDelete(piece.id)}
+                        >
+                          Remove Song
+                        </Button>
+                      </Box>
                     </CardContent>
                   </Card>
                 )
@@ -159,10 +175,17 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
           </Box>
           <MusicSearchModal
           token={this.props.token}
-          openModal={this.openModal}
-          closeModal={this.closeModal}
+          openModal={this.openAddSongModal}
+          closeModal={this.closeAddSongModal}
           isOpen={this.state.isAddMusicModalOpen}
           gigId={this.props.gigInfo.id}
+          />
+          <UpdateGigModal
+          token={this.props.token}
+          openModal={this.openUpdateGigModal}
+          closeModal={this.closeUpdateGigModal}
+          isOpen={this.state.isUpdateGigModalOpen}
+          gigInfo={this.props.gigInfo}
           />
         </Container>
       )
