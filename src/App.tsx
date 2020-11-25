@@ -80,30 +80,38 @@ class App extends React.Component<{}, AppState> {
       <div className="App">
         <BrowserRouter>
           <NavigationComponent
-            token={this.state.token}
-            handleLogout={this.handleLogout}/>
+          token={this.state.token}
+          handleLogout={this.handleLogout}
+          />
           <Switch>
             <Route exact path="/login">
               <LoginComponent
-                authenticateUser={this.authenticateUser}
-                token={this.state.token} />
+              authenticateUser={this.authenticateUser}
+              token={this.state.token}
+                />
             </Route>
             <Route exact path="/register">
               <RegisterComponent
-                authenticateUser={this.authenticateUser}
-                token={this.state.token}/>
+              authenticateUser={this.authenticateUser}
+              token={this.state.token}
+              />
             </Route>
             <Route exact path="/">
               <MainPageComponent
-                token={this.state.token}
-                isMusicModalOpen={this.state.isMusicModalOpen}
-                handleMusicModalClose={this.handleMusicModalClose}
-                handleMusicModalOpen={this.handleMusicModalOpen}
-                chooseGig={this.chooseGig}
-                />
+              token={this.state.token}
+              isMusicModalOpen={this.state.isMusicModalOpen}
+              handleMusicModalClose={this.handleMusicModalClose}
+              handleMusicModalOpen={this.handleMusicModalOpen}
+              chooseGig={this.chooseGig}
+              />
             </Route>
             <Route exact path="/music">
-              <MusicPageComponent />
+              <MusicPageComponent
+              token={this.state.token}
+              isMusicModalOpen={this.state.isMusicModalOpen}
+              handleMusicModalOpen={this.handleMusicModalOpen}
+              handleMusicModalClose={this.handleMusicModalClose}
+              />
             </Route>
             <Route exact path="/gig">
               <GigPageComponent
