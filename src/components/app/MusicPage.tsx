@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableContainer,
-  TableRow,
-  Paper,
-  Container,
-  Button,
-  IconButton
-} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableContainer, TableRow, Paper, Container, IconButton, Button } from '@material-ui/core';
 import { Delete, Edit, Add } from '@material-ui/icons';
 
 import NewMusicModal from './modals/NewMusicModal';
+import UpdateMusicModal from './modals/UpdateMusicModal';
 
 type MusicEntry = {
   id: number,
@@ -37,7 +27,9 @@ type MusicPageProps = {
 }
 
 type MusicPageState = {
-  musicList: Array<MusicEntry>
+  musicList: Array<MusicEntry>,
+  isUpdateModalOpen: boolean,
+  activeEntry: MusicEntry,
 }
 
 class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
@@ -46,10 +38,17 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
 
     this.state = {
       musicList: [],
+      isUpdateModalOpen: false,
+      activeEntry: {} as MusicEntry,
     }
+
+    this.deleteMusic = this.deleteMusic.bind(this);
+    this.fetchMusic = this.fetchMusic.bind(this);
+    this.openUpdateModal = this.openUpdateModal.bind(this); 
+    this.closeUpdateModal = this.closeUpdateModal.bind(this); 
   }
 
-  async componentDidMount() {
+  async fetchMusic() {
     let response = await fetch('http://localhost:5200/music', {
       method: 'GET',
       headers: new Headers({
@@ -62,8 +61,44 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
 
     this.setState({
       musicList: parsedResponse.results,
-    })
+    });
   }
+
+  async deleteMusic(musicId: number) {
+    await fetch(`http://localhost:5200/music/${musicId}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Authorization: this.props.token as string,
+      }),
+    });
+  }
+
+  openUpdateModal(entry: MusicEntry): void {
+    this.setState({
+      isUpdateModalOpen: true,
+      activeEntry: entry,
+    });
+
+    console.log(this.state.activeEntry)
+  }
+
+  closeUpdateModal(): void {
+    this.setState({
+      isUpdateModalOpen: false,
+    });
+  }
+
+  componentDidMount() {
+    this.fetchMusic();
+  }
+
+  //! Repeats infinitely when used
+  // componentDidUpdate() {
+  //   this.fetchMusic();
+  // }
+
+  
 
   render() {
 
@@ -103,8 +138,8 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
                       <TableCell>{row.instrument}</TableCell>
                       <TableCell>{row.duration}</TableCell>
                       <TableCell align="center">
-                        <IconButton color="primary"><Edit /></IconButton>
-                        <IconButton color="secondary"><Delete /></IconButton>
+                        <IconButton color="primary" onClick={() => this.openUpdateModal(row)}><Edit /></IconButton>
+                        <IconButton color="secondary" onClick={() => this.deleteMusic(row.id)}><Delete /></IconButton>
                       </TableCell>
                     </TableRow>
                   )
@@ -118,6 +153,12 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
           isOpen={this.props.isMusicModalOpen}
           handleOpen={this.props.handleMusicModalOpen}
           handleClose={this.props.handleMusicModalClose}
+          />
+          <UpdateMusicModal
+          token={this.props.token}
+          isOpen={this.state.isUpdateModalOpen}
+          closeModal={this.closeUpdateModal}
+          musicInfo={this.state.activeEntry}
           />
         </Container>
       )
