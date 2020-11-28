@@ -8,6 +8,7 @@ import NavigationComponent from './components/app/Navigation';
 import MainPageComponent from './components/app/main/MainPageComponent';
 import MusicPageComponent from './components/app/MusicPage';
 import GigPageComponent from './components/app/GigPage';
+import UserPageComponent from './components/app/UserPage';
 import Footer from './components/app/Footer';
 
 type GigInfo = {
@@ -20,16 +21,19 @@ type AppState = {
   token: string | null,
   isMusicModalOpen: boolean,
   gigInfo: GigInfo,
+  isUserAdmin: boolean
 }
 
 class App extends React.Component<{}, AppState> {
 
   constructor(props: any) {
     super(props);
+    
     this.state = {
       token: localStorage.getItem('sessionToken'),
       isMusicModalOpen: false,
-      gigInfo: {id: null, name: "", date: ""}
+      gigInfo: {id: null, name: "", date: ""},
+      isUserAdmin: false,
     }
 
     this.authenticateUser = this.authenticateUser.bind(this);
@@ -39,10 +43,11 @@ class App extends React.Component<{}, AppState> {
     this.chooseGig = this.chooseGig.bind(this);
   }
   
-  authenticateUser(token: string): void {
+  authenticateUser(token: string, userType: string): void {
     localStorage.setItem('sessionToken', token);
     this.setState({
       token: token,
+      isUserAdmin: userType === "admin",
     });
   }
 
@@ -82,6 +87,7 @@ class App extends React.Component<{}, AppState> {
           <NavigationComponent
           token={this.state.token}
           handleLogout={this.handleLogout}
+          isAdmin={this.state.isUserAdmin}
           />
           <Switch>
             <Route exact path="/login">
@@ -116,6 +122,12 @@ class App extends React.Component<{}, AppState> {
             <Route exact path="/gig">
               <GigPageComponent
               gigInfo={this.state.gigInfo}
+              token={this.state.token}
+              />
+            </Route>
+            <Route exact path="/users">
+              <UserPageComponent
+              isAdmin={this.state.isUserAdmin}
               token={this.state.token}
               />
             </Route>

@@ -8,7 +8,7 @@ type LoginState = {
 };
 
 type AcceptedProps = {
-  authenticateUser: (token: string) => void,
+  authenticateUser: (token: string, userType: string) => void,
   token: string | null,
 }
 
@@ -43,7 +43,8 @@ class LoginComponent extends Component<AcceptedProps, LoginState> {
 
       let parsedResponse = await response.json();
       let token = parsedResponse.token;
-      this.props.authenticateUser(token)
+      let userType = parsedResponse.userType;
+      this.props.authenticateUser(token, userType);
     } else {
       alert('Enter email AND password');
     }

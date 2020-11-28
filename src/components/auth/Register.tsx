@@ -9,7 +9,7 @@ type RegisterState = {
 }
 
 type AcceptedProps = {
-  authenticateUser: (token: string) => void,
+  authenticateUser: (token: string, userType: string) => void,
   token: string | null,
 }
 
@@ -50,7 +50,8 @@ class RegisterComponent extends Component<AcceptedProps, RegisterState> {
 
         let parsedResponse = await response.json();
         let token = parsedResponse.token;
-        this.props.authenticateUser(token);
+        let userType = parsedResponse.userType;
+        this.props.authenticateUser(token, userType);
       } else {
         alert('Password and Confirm Password must match')
       }

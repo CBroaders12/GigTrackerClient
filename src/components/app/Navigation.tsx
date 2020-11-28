@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 type NavbarProps = {
   token: string | null,
   handleLogout: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  isAdmin: boolean,
 }
 
 class NavigationComponent extends Component<NavbarProps, {/* state */}> {
@@ -24,6 +25,10 @@ class NavigationComponent extends Component<NavbarProps, {/* state */}> {
               ? <>
                   <Link to="/"><Button>Home</Button></Link>
                   <Link to="/music"><Button>Your Music</Button></Link>
+                  {this.props.isAdmin
+                    ? <Link to="/users"><Button>Users</Button></Link>
+                    : <></>
+                  }
                   <Link to="/login"><Button onClick={this.props.handleLogout}>Logout</Button></Link>
                 </>
               : <>
