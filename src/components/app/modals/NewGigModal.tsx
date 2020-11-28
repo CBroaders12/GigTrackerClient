@@ -5,8 +5,7 @@ import { Add } from '@material-ui/icons';
 type GigModalProps = {
   token: string | null,
   isOpen: boolean,
-  handleOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-  handleClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  closeModal: () => void
 }
 
 type GigModalState = {
@@ -44,7 +43,7 @@ class NewGigModal extends Component<GigModalProps, GigModalState> {
   async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    let response = await fetch('http://localhost:5200/gig/new', {
+    await fetch('http://localhost:5200/gig/new', {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -60,6 +59,8 @@ class NewGigModal extends Component<GigModalProps, GigModalState> {
       name: "",
       date: "",
     });
+
+    this.props.closeModal();
   }
 
   render() {
@@ -67,7 +68,7 @@ class NewGigModal extends Component<GigModalProps, GigModalState> {
       <Modal
         id="newGigModal"
         open={this.props.isOpen}
-        onClose={this.props.handleClose}
+        onClose={this.props.closeModal}
       >
         <Paper>
           <h2>Add New Music</h2>

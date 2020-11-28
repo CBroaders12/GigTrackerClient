@@ -16,8 +16,8 @@ type GigInfo = {
 type MainProps = {
   token: string | null;
   isMusicModalOpen: boolean,
-  handleMusicModalOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-  handleMusicModalClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  openNewMusicModal: () => void,
+  closeNewMusicModal: () => void,
   chooseGig: (gigDetails: GigInfo) => void,
 }
 
@@ -33,17 +33,17 @@ class MainPageComponent extends Component<MainProps, MainState> {
       isGigModalOpen: false,
     }
 
-    this.handleGigModalOpen = this.handleGigModalOpen.bind(this);
-    this.handleGigModalClose = this.handleGigModalClose.bind(this);
+    this.openNewGigModal = this.openNewGigModal.bind(this);
+    this.closeNewGigModal = this.closeNewGigModal.bind(this);
   }
 
-  handleGigModalOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  openNewGigModal(): void {
     this.setState({
       isGigModalOpen: true,
     });
   }
   
-  handleGigModalClose(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  closeNewGigModal(): void {
     this.setState({
       isGigModalOpen: false,
     });
@@ -58,27 +58,25 @@ class MainPageComponent extends Component<MainProps, MainState> {
             <Grid item xs={4} id="musicPreview">
               <MusicPreview
                 token={this.props.token}
-                handleOpen={this.props.handleMusicModalOpen}
+                handleOpen={this.props.openNewMusicModal}
               />
             </Grid>
             <Grid item xs={8} id="gigList">
               <GigList
                 token={this.props.token}
-                handleOpen={this.handleGigModalOpen}
+                handleOpen={this.openNewGigModal}
                 chooseGig={this.props.chooseGig}
               />
             </Grid>
           </Grid>
           <NewMusicModal
             isOpen={this.props.isMusicModalOpen}
-            handleOpen={this.props.handleMusicModalOpen}
-            handleClose={this.props.handleMusicModalClose}
+            closeModal={this.props.closeNewMusicModal}
             token={this.props.token}
           />
           <NewGigModal
             isOpen={this.state.isGigModalOpen}
-            handleOpen={this.handleGigModalOpen}
-            handleClose={this.handleGigModalClose}
+            closeModal={this.closeNewGigModal}
             token={this.props.token}
           />
         </>

@@ -22,8 +22,8 @@ type MusicEntry = {
 type MusicPageProps = {
   token: string | null,
   isMusicModalOpen: boolean,
-  handleMusicModalOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-  handleMusicModalClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  openNewMusicModal: () => void,
+  closeNewMusicModal: () => void,
 }
 
 type MusicPageState = {
@@ -111,7 +111,7 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
           color="primary"
           variant="contained"
           startIcon={<Add />}
-          onClick={this.props.handleMusicModalOpen}
+          onClick={this.props.openNewMusicModal}
           >
             Add Song
           </Button>
@@ -151,8 +151,7 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
           <NewMusicModal
           token={this.props.token}
           isOpen={this.props.isMusicModalOpen}
-          handleOpen={this.props.handleMusicModalOpen}
-          handleClose={this.props.handleMusicModalClose}
+          closeModal={this.props.closeNewMusicModal}
           />
           <UpdateMusicModal
           token={this.props.token}

@@ -5,8 +5,7 @@ import { Add } from '@material-ui/icons';
 type MusicModalProps = {
   token: string | null,
   isOpen: boolean,
-  handleOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-  handleClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  closeModal: () => void
 }
 
 type MusicModalState = {
@@ -92,7 +91,9 @@ class NewMusicModal extends Component<MusicModalProps, MusicModalState> {
       style: "",
       instrument: "",
       duration: "",
-    })
+    });
+
+    this.props.closeModal();
   }
 
   render() {
@@ -100,7 +101,7 @@ class NewMusicModal extends Component<MusicModalProps, MusicModalState> {
       <Modal
         id="newMusicModal"
         open={this.props.isOpen}
-        onClose={this.props.handleClose}
+        onClose={this.props.closeModal}
       >
         <Paper>
           <h2>Add New Music</h2>

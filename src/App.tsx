@@ -34,8 +34,8 @@ class App extends React.Component<{}, AppState> {
 
     this.authenticateUser = this.authenticateUser.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleMusicModalOpen = this.handleMusicModalOpen.bind(this);
-    this.handleMusicModalClose = this.handleMusicModalClose.bind(this);
+    this.openNewMusicModal = this.openNewMusicModal.bind(this);
+    this.closeNewMusicModal = this.closeNewMusicModal.bind(this);
     this.chooseGig = this.chooseGig.bind(this);
   }
   
@@ -53,13 +53,13 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
-  handleMusicModalOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  openNewMusicModal(): void {
     this.setState({
       isMusicModalOpen: true,
     });
   }
   
-  handleMusicModalClose(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  closeNewMusicModal(): void {
     this.setState({
       isMusicModalOpen: false,
     });
@@ -100,8 +100,8 @@ class App extends React.Component<{}, AppState> {
               <MainPageComponent
               token={this.state.token}
               isMusicModalOpen={this.state.isMusicModalOpen}
-              handleMusicModalClose={this.handleMusicModalClose}
-              handleMusicModalOpen={this.handleMusicModalOpen}
+              closeNewMusicModal={this.closeNewMusicModal}
+              openNewMusicModal={this.openNewMusicModal}
               chooseGig={this.chooseGig}
               />
             </Route>
@@ -109,8 +109,8 @@ class App extends React.Component<{}, AppState> {
               <MusicPageComponent
               token={this.state.token}
               isMusicModalOpen={this.state.isMusicModalOpen}
-              handleMusicModalOpen={this.handleMusicModalOpen}
-              handleMusicModalClose={this.handleMusicModalClose}
+              openNewMusicModal={this.openNewMusicModal}
+              closeNewMusicModal={this.closeNewMusicModal}
               />
             </Route>
             <Route exact path="/gig">
