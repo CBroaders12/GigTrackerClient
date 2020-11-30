@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Modal, TextField, Button, Paper } from '@material-ui/core';
 import { Update } from '@material-ui/icons';
 
@@ -97,6 +99,7 @@ class UpdateGigModal extends Component<UpdateGigProps, UpdateGigState> {
             />
             <Button
               className="addButton"
+              color="primary"
               variant="contained"
               size="large"
               startIcon={<Update />}

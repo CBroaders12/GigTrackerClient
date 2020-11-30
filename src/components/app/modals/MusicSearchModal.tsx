@@ -50,17 +50,25 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
   }
 
   async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
+    event.preventDefault();
+
     await fetch(`http://localhost:5200/gig/${this.props.gigId}/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: this.props.token ? this.props.token : ""
+        Authorization: this.props.token as string
       },
       body : JSON.stringify({
         musicId: this.state.musicId,
         notes: this.state.notes
       })
     });
+
+    this.setState({
+      musicList: []
+    })
+
+    this.props.closeModal();
   }
 
   updateMusicId(event: React.ChangeEvent<{name?: string | undefined; value: unknown;}>): void {
@@ -75,8 +83,17 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
     });
   }
 
-  async componentDidMount() {
-    this.fetchMusic();
+  // componentDidMount() {
+  //   this.fetchMusic();
+  // }
+
+  componentDidUpdate(prevProps: SearchModalProps, prevState: SearchModalState) {
+    if (prevProps.isOpen !== this.props.isOpen) {
+      this.fetchMusic();
+      this.setState({
+        musicId: null,
+      })
+    }
   }
 
   render() {
@@ -97,7 +114,7 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
             fullWidth={true}
             onChange={this.updateMusicId}
             >
-              <MenuItem value={undefined}>---</MenuItem>
+              <MenuItem value={''}>---</MenuItem>
               {
                 this.state.musicList.map(piece => {
                   return(
@@ -120,6 +137,7 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
             />
             <Button
             className="addButton"
+            color="primary"
             variant="contained"
             size="large"
             startIcon={<Add />}

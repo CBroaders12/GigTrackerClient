@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { Container, Box, Button, Card, CardContent, Typography } from '@material-ui/core';
 import { Add, Delete, Edit } from '@material-ui/icons';
@@ -20,6 +20,8 @@ type GigPageProps = {
 
 type GigPageState = {
   musicList: Array<any>,
+  gigName: string,
+  gigDate: string,
   isAddMusicModalOpen: boolean,
   isUpdateGigModalOpen: boolean,
 }
@@ -30,6 +32,8 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
 
     this.state = {
       musicList: [],
+      gigName: this.props.gigInfo.name,
+      gigDate: this.props.gigInfo.date,
       isAddMusicModalOpen: false,
       isUpdateGigModalOpen: false,
     }
@@ -85,6 +89,10 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
         'Authorization': this.props.token ? this.props.token : ""
       })
     });
+
+    this.setState({
+      musicList: []
+    });
   }
 
   async fetchGigMusic(): Promise<void> {
@@ -100,11 +108,22 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
 
       this.setState({
         musicList: parsedResponse.targetGig ? parsedResponse.targetGig.music : [], //Catch if user tries to navigate to the page without selecting a gig
-      })
+        gigName: parsedResponse.targetGig ? parsedResponse.targetGig.name : "",
+        gigDate: parsedResponse.targetGig ? parsedResponse.targetGig.date: ""
+      });
   }
 
   componentDidMount() {
     if (this.props.gigInfo.id) {
+      this.fetchGigMusic();
+    }
+  }
+  
+  componentDidUpdate(prevProps: GigPageProps, prevState: GigPageState) {
+    if (prevState.isAddMusicModalOpen !== this.state.isAddMusicModalOpen
+      || prevState.musicList.length !== this.state.musicList.length
+      || prevState.isUpdateGigModalOpen !== this.state.isUpdateGigModalOpen
+    ) {
       this.fetchGigMusic();
     }
   }
@@ -113,8 +132,8 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     if (this.props.gigInfo.id) { //Only display the page if there is a chosen gig
       return(
         <Container maxWidth="md">
-          <h1>{this.props.gigInfo.name}</h1>
-          <h3>Date: {this.props.gigInfo.date ? this.props.gigInfo.date : 'TBD'}</h3>
+          <h1>{this.state.gigName}</h1>
+          <h3>Date: {this.state.gigDate ? this.state.gigDate : 'TBD'}</h3>
           <Button
           color="primary"
           variant="contained"
