@@ -50,6 +50,18 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidUpdate(prevProps: any, prevState: any) {
+    if (prevProps.musicInfo !== this.props.musicInfo) {
+      this.setState({
+        title: this.props.musicInfo.title,
+        artist: this.props.musicInfo.artist,
+        style: this.props.musicInfo.style,
+        instrument: this.props.musicInfo.instrument,
+        duration: this.props.musicInfo.duration,
+      })
+    }
+  }
+
   updateTitle(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       title: event.target.value,
@@ -83,7 +95,7 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
   async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    let response = await fetch(`http://localhost:5200/music/${this.props.musicInfo.id}`, {
+    await fetch(`http://localhost:5200/music/${this.props.musicInfo.id}`, {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -97,9 +109,6 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
         duration: this.state.duration ? this.state.duration : null,
       }),
     })
-
-    let parsedResponse = response.json();
-    console.log(parsedResponse);
 
     this.props.closeModal();
   }

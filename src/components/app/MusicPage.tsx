@@ -72,6 +72,9 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
         Authorization: this.props.token as string,
       }),
     });
+    this.setState({ //Reset state so the component re-renders properly
+      musicList: []
+    });
   }
 
   openUpdateModal(entry: MusicEntry): void {
@@ -79,8 +82,6 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
       isUpdateModalOpen: true,
       activeEntry: entry,
     });
-
-    console.log(this.state.activeEntry)
   }
 
   closeUpdateModal(): void {
@@ -93,10 +94,12 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
     this.fetchMusic();
   }
 
-  //! Repeats infinitely when used
-  // componentDidUpdate() {
-  //   this.fetchMusic();
-  // }
+  componentDidUpdate(prevProps: any, prevState: any) {
+    if (prevState.musicList.length !== this.state.musicList.length || prevProps.isMusicModalOpen === true || prevState.isUpdateModalOpen === true) {
+      this.fetchMusic();
+      console.log("componentDidUpdate fetch")
+    }
+  }
 
   
 
