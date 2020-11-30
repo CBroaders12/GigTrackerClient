@@ -5,7 +5,7 @@ import { Add } from '@material-ui/icons';
 
 type PreviewProps = {
   token: string | null,
-  handleOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  openModal: () => void,
 }
 
 type PreviewState = {
@@ -21,12 +21,16 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.fetchMusic()
+  }
+
+  async fetchMusic() {
     let musicResponse = await fetch('http://localhost:5200/music', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        Authorization: this.props.token ? this.props.token : "",
+        Authorization: this.props.token as string,
       }),
     });
 
@@ -37,7 +41,7 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
   }
 
   render() {
-    // Only display the first five music entries in the preview
+    // Only display the first six music entries in the preview
     let previewEntries = this.state.musicEntries.length < 6
       ? this.state.musicEntries
       : this.state.musicEntries.slice(0, 6);
@@ -57,19 +61,20 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
         })}
         <Link to="/music">
           <Button
-            variant="contained"
-            color="default"
-            size="large"
+          variant="contained"
+          color="default"
+          size="large"
           >
             See More
           </Button>
         </Link>
         <Button
-          className="addButton"
-          variant="contained"
-          size="large"
-          startIcon={<Add />}
-          onClick={this.props.handleOpen}
+        className="addButton"
+        variant="contained"
+        color="primary"
+        size="large"
+        startIcon={<Add />}
+        onClick={this.props.openModal}
         >
           Add Music
         </Button>

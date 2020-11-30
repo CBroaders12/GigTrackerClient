@@ -13,7 +13,7 @@ type GigInfo = {
 
 type GigListProps = {
   token: string | null,
-  handleOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  openModal: () => void,
   chooseGig: (gigDetails: GigInfo) => void,
 }
 
@@ -35,7 +35,7 @@ class GigList extends Component<GigListProps, GigState> {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        Authorization: this.props.token ? this.props.token : "",
+        Authorization: this.props.token as string,
       }),
     });
 
@@ -68,10 +68,10 @@ class GigList extends Component<GigListProps, GigState> {
               <IconButton
               id="addGigButton"
               className="addButton"
-              onClick={this.props.handleOpen}
+              onClick={this.props.openModal}
               size="medium"
               >
-                <Add />
+                <Add htmlColor="white"/>
               </IconButton>
             </CardContent>
           </Card>

@@ -97,11 +97,8 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
   componentDidUpdate(prevProps: any, prevState: any) {
     if (prevState.musicList.length !== this.state.musicList.length || prevProps.isMusicModalOpen === true || prevState.isUpdateModalOpen === true) {
       this.fetchMusic();
-      console.log("componentDidUpdate fetch")
     }
   }
-
-  
 
   render() {
 

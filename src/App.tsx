@@ -8,7 +8,7 @@ import NavigationComponent from './components/app/Navigation';
 import MainPageComponent from './components/app/main/MainPageComponent';
 import MusicPageComponent from './components/app/MusicPage';
 import GigPageComponent from './components/app/GigPage';
-import UserPageComponent from './components/app/UserPage';
+import UserPageComponent from './components/app/admin/UserPage';
 import Footer from './components/app/Footer';
 
 type GigInfo = {

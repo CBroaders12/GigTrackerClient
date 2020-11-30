@@ -58,13 +58,13 @@ class MainPageComponent extends Component<MainProps, MainState> {
             <Grid item xs={4} id="musicPreview">
               <MusicPreview
                 token={this.props.token}
-                handleOpen={this.props.openNewMusicModal}
+                openModal={this.props.openNewMusicModal}
               />
             </Grid>
             <Grid item xs={8} id="gigList">
               <GigList
                 token={this.props.token}
-                handleOpen={this.openNewGigModal}
+                openModal={this.openNewGigModal}
                 chooseGig={this.props.chooseGig}
               />
             </Grid>
