@@ -24,23 +24,22 @@ class NewGigModal extends Component<GigModalProps, GigModalState> {
 
     this.updateName = this.updateName.bind(this);
     this.updateDate = this.updateDate.bind(this);
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  updateName(event: React.ChangeEvent<HTMLInputElement>) {
+  updateName(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       name: event.target.value,
     })
   }
 
-  updateDate(event: React.ChangeEvent<HTMLInputElement>) {
+  updateDate(event: React.ChangeEvent<HTMLInputElement>):void {
     this.setState({
       date: event.target.value,
     })
   }
 
-  async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
     await fetch('http://localhost:5200/gig/new', {

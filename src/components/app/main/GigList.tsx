@@ -4,7 +4,6 @@ import { Add } from '@material-ui/icons';
 
 import GigCard from './GigCard';
 
-// Create a type for the relevant information from the fetch
 type GigInfo = {
   id: number,
   name: string,
@@ -28,9 +27,11 @@ class GigList extends Component<GigListProps, GigState> {
     this.state = {
       gigEntries: [],
     }
+
+    this.fetchGigs = this.fetchGigs.bind(this);
   }
 
-  async componentDidMount() {
+  async fetchGigs(): Promise<void> {
     let gigResponse = await fetch('http://localhost:5200/gig', {
       method: 'GET',
       headers: new Headers({
@@ -44,6 +45,10 @@ class GigList extends Component<GigListProps, GigState> {
     this.setState({
       gigEntries: gigsJSON.gigs,
     });
+  }
+
+  componentDidMount() {
+    this.fetchGigs();
   }
 
   render() {

@@ -34,30 +34,13 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
       isUpdateGigModalOpen: false,
     }
 
+    this.fetchGigMusic = this.fetchGigMusic.bind(this);
     this.openAddSongModal = this.openAddSongModal.bind(this);
     this.closeAddSongModal = this.closeAddSongModal.bind(this);
     this.openUpdateGigModal = this.openUpdateGigModal.bind(this);
     this.closeUpdateGigModal = this.closeUpdateGigModal.bind(this);
     this.handleMusicDelete = this.handleMusicDelete.bind(this);
     this.handleGigDelete = this.handleGigDelete.bind(this);
-  }
-
-  async componentDidMount() {
-    if (this.props.gigInfo.id) {
-      let response = await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}`, {
-        method: 'GET',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          Authorization: this.props.token ? this.props.token : "",
-        }),
-      });
-
-      let parsedResponse = await response.json();
-
-      this.setState({
-        musicList: parsedResponse.targetGig ? parsedResponse.targetGig.music : [], //Catch if user tries to navigate to the page without selecting a gig
-      })
-    }
   }
 
   openAddSongModal(): void {
@@ -84,7 +67,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     })
   }
 
-  async handleGigDelete() {
+  async handleGigDelete(): Promise<void> {
     await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}`, {
       method: 'DELETE',
       headers: new Headers({
@@ -94,7 +77,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     });
   }
 
-  async handleMusicDelete(target: number) {
+  async handleMusicDelete(target: number): Promise<void> {
     await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}/${target}`, {
       method: 'DELETE',
       headers: new Headers({
@@ -104,7 +87,27 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     });
   }
 
-  //TODO: componentWillUnmount
+  async fetchGigMusic(): Promise<void> {
+    let response = await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}`, {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: this.props.token ? this.props.token : "",
+        }),
+      });
+
+      let parsedResponse = await response.json();
+
+      this.setState({
+        musicList: parsedResponse.targetGig ? parsedResponse.targetGig.music : [], //Catch if user tries to navigate to the page without selecting a gig
+      })
+  }
+
+  componentDidMount() {
+    if (this.props.gigInfo.id) {
+      this.fetchGigMusic();
+    }
+  }
 
   render() {
     if (this.props.gigInfo.id) { //Only display the page if there is a chosen gig

@@ -32,7 +32,11 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       token: localStorage.getItem('sessionToken'),
       isMusicModalOpen: false,
-      gigInfo: {id: null, name: "", date: ""},
+      gigInfo: {
+        id: null,
+        name: "",
+        date: ""
+      },
       isUserAdmin: false,
     }
 

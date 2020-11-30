@@ -35,19 +35,19 @@ class UpdateGigModal extends Component<UpdateGigProps, UpdateGigState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  updateName(event: React.ChangeEvent<HTMLInputElement>) {
+  updateName(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       name: event.target.value
     });
   }
 
-  updateDate(event: React.ChangeEvent<HTMLInputElement>) {
+  updateDate(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       date: event.target.value
     })
   }
 
-  async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
     await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}`, {

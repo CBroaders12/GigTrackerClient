@@ -48,7 +48,7 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
     this.closeUpdateModal = this.closeUpdateModal.bind(this); 
   }
 
-  async fetchMusic() {
+  async fetchMusic(): Promise<void> {
     let response = await fetch('http://localhost:5200/music', {
       method: 'GET',
       headers: new Headers({
@@ -64,7 +64,7 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
     });
   }
 
-  async deleteMusic(musicId: number) {
+  async deleteMusic(musicId: number): Promise<void> {
     await fetch(`http://localhost:5200/music/${musicId}`, {
       method: 'DELETE',
       headers: new Headers({
@@ -94,7 +94,7 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
     this.fetchMusic();
   }
 
-  componentDidUpdate(prevProps: any, prevState: any) {
+  componentDidUpdate(prevProps: MusicPageProps, prevState: MusicPageState) {
     if (prevState.musicList.length !== this.state.musicList.length || prevProps.isMusicModalOpen === true || prevState.isUpdateModalOpen === true) {
       this.fetchMusic();
     }

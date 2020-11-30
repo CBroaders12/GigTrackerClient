@@ -21,11 +21,7 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
     }
   }
 
-  componentDidMount() {
-    this.fetchMusic()
-  }
-
-  async fetchMusic() {
+  async fetchMusic(): Promise<void> {
     let musicResponse = await fetch('http://localhost:5200/music', {
       method: 'GET',
       headers: new Headers({
@@ -38,6 +34,10 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
     this.setState({
       musicEntries: resultsJSON.results,
     });
+  }
+
+  componentDidMount() {
+    this.fetchMusic()
   }
 
   render() {

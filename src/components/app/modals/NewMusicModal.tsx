@@ -37,37 +37,37 @@ class NewMusicModal extends Component<MusicModalProps, MusicModalState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  updateTitle(event: React.ChangeEvent<HTMLInputElement>) {
+  updateTitle(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       title: event.target.value,
     })
   }
 
-  updateArtist(event: React.ChangeEvent<HTMLInputElement>) {
+  updateArtist(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       artist: event.target.value,
     })
   }
 
-  updateStyle(event: React.ChangeEvent<HTMLInputElement>) {
+  updateStyle(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       style: event.target.value,
     })
   }
 
-  updateInstrument(event: React.ChangeEvent<HTMLInputElement>) {
+  updateInstrument(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       instrument: event.target.value,
     })
   }
 
-  updateDuration(event: React.ChangeEvent<HTMLInputElement>) {
+  updateDuration(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       duration: event.target.value,
     })
   }
 
-  async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
     await fetch('http://localhost:5200/music/new', {

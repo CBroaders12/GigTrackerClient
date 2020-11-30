@@ -13,9 +13,7 @@ type GigCardProps = {
   chooseGig: (gigDetails: GigInfo) => void,
 }
 
-type GigCardState = {
-
-}
+type GigCardState = {}
 
 class GigCard extends Component<GigCardProps, GigCardState> {
   constructor(props: GigCardProps) {

@@ -27,7 +27,7 @@ type UserPageState = {
 }
 
 class UserPageComponent extends Component<UserPageProps, UserPageState> {
-  constructor(props: any) {
+  constructor(props: UserPageProps) {
     super(props);
     this.state = {
       users: [],
@@ -42,7 +42,7 @@ class UserPageComponent extends Component<UserPageProps, UserPageState> {
     this.makeAdmin = this.makeAdmin.bind(this);
   }
   
-  async fetchUsers() {
+  async fetchUsers(): Promise<void> {
     let response = await fetch('http://localhost:5200/admin/users', {
       method: 'GET',
       headers: new Headers({
@@ -58,7 +58,7 @@ class UserPageComponent extends Component<UserPageProps, UserPageState> {
     });
   }
 
-  async deleteUser(userId: number) {
+  async deleteUser(userId: number): Promise<void> {
     await fetch(`http://localhost:5200/admin/users/${userId}`, {
       method: 'DELETE',
       headers: new Headers({
@@ -72,7 +72,7 @@ class UserPageComponent extends Component<UserPageProps, UserPageState> {
     });
   }
 
-  async makeAdmin(userId: number) {
+  async makeAdmin(userId: number): Promise<void> {
     fetch(`http://localhost:5200/admin/add/${userId}`, {
       method: 'PUT',
       headers: new Headers({
@@ -86,14 +86,14 @@ class UserPageComponent extends Component<UserPageProps, UserPageState> {
     })
   }
 
-  openPasswordModal(userId: number) {
+  openPasswordModal(userId: number): void {
     this.setState({
       isPasswordModalOpen: true,
       activeUser: userId,
     });
   }
 
-  closePasswordModal() {
+  closePasswordModal(): void {
     this.setState({
       isPasswordModalOpen: false,
     });

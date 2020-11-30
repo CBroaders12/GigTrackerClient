@@ -27,17 +27,18 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
       musicList: []
     }
 
+    this.fetchMusic = this.fetchMusic.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateMusicId = this.updateMusicId.bind(this);
     this.updateNotes = this.updateNotes.bind(this);
   }
 
-  async componentDidMount() {
+  async fetchMusic(): Promise<void> {
     let response = await fetch('http://localhost:5200/music', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        Authorization: this.props.token ? this.props.token : ""
+        Authorization: this.props.token as string,
       })
     });
 
@@ -48,7 +49,7 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
     });
   }
 
-  async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     await fetch(`http://localhost:5200/gig/${this.props.gigId}/add`, {
       method: 'POST',
       headers: {
@@ -62,16 +63,20 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
     });
   }
 
-  updateMusicId(event: React.ChangeEvent<{name?: string | undefined; value: unknown;}>)  {
+  updateMusicId(event: React.ChangeEvent<{name?: string | undefined; value: unknown;}>): void {
     this.setState({
       musicId: event.target.value as number | null,
     });
   }
 
-  updateNotes(event: React.ChangeEvent<HTMLInputElement>) {
+  updateNotes(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       notes: event.target.value
     });
+  }
+
+  async componentDidMount() {
+    this.fetchMusic();
   }
 
   render() {

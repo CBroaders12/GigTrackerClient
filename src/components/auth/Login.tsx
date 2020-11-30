@@ -7,26 +7,25 @@ type LoginState = {
   password: string,
 };
 
-type AcceptedProps = {
+type LoginProps = {
   authenticateUser: (token: string, userType: string) => void,
   token: string | null,
 }
 
-class LoginComponent extends Component<AcceptedProps, LoginState> {
-  constructor(props: AcceptedProps) {
+class LoginComponent extends Component<LoginProps, LoginState> {
+  constructor(props: LoginProps) {
     super(props);
     this.state = {
       email: "",
       password: "",
     };
 
-    // Bind event handlers
     this.updateEmail = this.updateEmail.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.onLoginSubmit = this.onLoginSubmit.bind(this);
   }
 
-  async onLoginSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async onLoginSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault()
 
     if (this.state.email && this.state.password) {
@@ -50,13 +49,13 @@ class LoginComponent extends Component<AcceptedProps, LoginState> {
     }
   }
 
-  updateEmail(event: React.ChangeEvent<HTMLInputElement>) {
+  updateEmail(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       email: event.target.value
     });
   }
   
-  updatePassword(event: React.ChangeEvent<HTMLInputElement>) {
+  updatePassword(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       password: event.target.value
     });

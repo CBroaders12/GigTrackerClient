@@ -8,7 +8,7 @@ type RegisterState = {
   passwordConfirm: string
 }
 
-type AcceptedProps = {
+type RegisterProps = {
   authenticateUser: (token: string, userType: string) => void,
   token: string | null,
 }
@@ -16,8 +16,8 @@ type AcceptedProps = {
 let emailRegex = /[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,}/;
 let passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&*()\-+=^_]).{8,20}$/;
 
-class RegisterComponent extends Component<AcceptedProps, RegisterState> {
-  constructor(props: AcceptedProps) {
+class RegisterComponent extends Component<RegisterProps, RegisterState> {
+  constructor(props: RegisterProps) {
     super(props);
     this.state = {
       email: "",
@@ -25,14 +25,13 @@ class RegisterComponent extends Component<AcceptedProps, RegisterState> {
       passwordConfirm: ""
     };
 
-    // Bind event handlers
     this.onRegisterSubmit = this.onRegisterSubmit.bind(this);
     this.updateEmail = this.updateEmail.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.updatePasswordConfirm = this.updatePasswordConfirm.bind(this);
   }
 
-  async onRegisterSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async onRegisterSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
     if (this.state.email && this.state.password && this.state.passwordConfirm) {
@@ -60,19 +59,19 @@ class RegisterComponent extends Component<AcceptedProps, RegisterState> {
     }
   }
 
-  updateEmail(event: React.ChangeEvent<HTMLInputElement>) {
+  updateEmail(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       email: event.target.value
     });
   }
 
-  updatePassword(event: React.ChangeEvent<HTMLInputElement>) {
+  updatePassword(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       password: event.target.value
     });
   }
 
-  updatePasswordConfirm(event: React.ChangeEvent<HTMLInputElement>) {
+  updatePasswordConfirm(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       passwordConfirm: event.target.value
     });

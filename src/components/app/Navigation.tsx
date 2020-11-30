@@ -9,10 +9,6 @@ type NavbarProps = {
 }
 
 class NavigationComponent extends Component<NavbarProps, {/* state */}> {
-  constructor(props: NavbarProps) {
-    super(props);
-  }
-
   render() {
     return(
       <AppBar position="static" color="secondary" className="navBar">

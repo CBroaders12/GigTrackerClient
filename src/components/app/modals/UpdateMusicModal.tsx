@@ -46,7 +46,6 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
     this.updateStyle = this.updateStyle.bind(this);
     this.updateInstrument = this.updateInstrument.bind(this);
     this.updateDuration = this.updateDuration.bind(this);
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -62,37 +61,37 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
     }
   }
 
-  updateTitle(event: React.ChangeEvent<HTMLInputElement>) {
+  updateTitle(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       title: event.target.value,
     })
   }
 
-  updateArtist(event: React.ChangeEvent<HTMLInputElement>) {
+  updateArtist(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       artist: event.target.value,
     })
   }
 
-  updateStyle(event: React.ChangeEvent<HTMLInputElement>) {
+  updateStyle(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       style: event.target.value,
     })
   }
 
-  updateInstrument(event: React.ChangeEvent<HTMLInputElement>) {
+  updateInstrument(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       instrument: event.target.value,
     })
   }
 
-  updateDuration(event: React.ChangeEvent<HTMLInputElement>) {
+  updateDuration(event: React.ChangeEvent<HTMLInputElement>): void {
     this.setState({
       duration: event.target.value,
     })
   }
 
-  async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
     await fetch(`http://localhost:5200/music/${this.props.musicInfo.id}`, {
