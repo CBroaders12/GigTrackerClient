@@ -40,6 +40,12 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
     this.fetchMusic()
   }
 
+  // componentDidUpdate(prevProps: PreviewProps, prevState: PreviewState) {
+  //   if (false) {
+
+  //   }
+  // }
+
   render() {
     // Only display the first six music entries in the preview
     let previewEntries = this.state.musicEntries.length < 6

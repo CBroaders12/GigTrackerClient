@@ -64,6 +64,7 @@ class MainPageComponent extends Component<MainProps, MainState> {
             <Grid item xs={8} id="gigList">
               <GigList
                 token={this.props.token}
+                isModalOpen={this.state.isGigModalOpen}
                 openModal={this.openNewGigModal}
                 chooseGig={this.props.chooseGig}
               />

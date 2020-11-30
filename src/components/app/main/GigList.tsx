@@ -12,15 +12,16 @@ type GigInfo = {
 
 type GigListProps = {
   token: string | null,
+  isModalOpen: boolean,
   openModal: () => void,
   chooseGig: (gigDetails: GigInfo) => void,
 }
 
-type GigState = {
+type GigListState = {
   gigEntries: Array<GigInfo>
 }
 
-class GigList extends Component<GigListProps, GigState> {
+class GigList extends Component<GigListProps, GigListState> {
   constructor(props: GigListProps) {
     super(props);
 
@@ -47,8 +48,18 @@ class GigList extends Component<GigListProps, GigState> {
     });
   }
 
+  updateGigList(): void {
+
+  }
+
   componentDidMount() {
     this.fetchGigs();
+  }
+
+  componentDidUpdate(prevProps: GigListProps, prevState: GigListState) {
+    if (prevProps.isModalOpen !== this.props.isModalOpen) {
+      this.fetchGigs();
+    }
   }
 
   render() {
