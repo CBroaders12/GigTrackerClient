@@ -114,6 +114,7 @@ a {
   text-decoration: none;
 }
 
-#musicPageContainer {
+#musicPageContainer,
+#gigPageContainer {
   margin-top: 2rem;
 }

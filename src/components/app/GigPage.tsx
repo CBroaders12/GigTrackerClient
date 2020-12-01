@@ -170,9 +170,9 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
   render() {
     if (this.props.gigInfo.id) { //Only display the page if there is a chosen gig
       return(
-        <Container maxWidth="md">
-          <h1>{this.state.gigName}</h1>
-          <h3>Date: {this.state.gigDate ? this.state.gigDate : 'TBD'}</h3>
+        <Container maxWidth="md" id="gigPageContainer">
+          <Typography component="h1" variant="h4">{this.state.gigName}</Typography>
+          <Typography component="h3" variant="subtitle1">Date: {this.state.gigDate ? this.state.gigDate : 'TBD'}</Typography>
           <Button
           color="primary"
           variant="contained"
