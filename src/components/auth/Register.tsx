@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { TextField, Paper, Container, Button } from '@material-ui/core';
+import { TextField, Paper, Container, Button, Typography } from '@material-ui/core';
 
 type RegisterState = {
   email: string,
@@ -87,7 +87,7 @@ class RegisterComponent extends Component<RegisterProps, RegisterState> {
         <Container className="authContainer" maxWidth={false}>
           <Paper className="authForm" elevation={5}>
             <form onSubmit={this.onRegisterSubmit}>
-              <h2>Register</h2>
+              <Typography component="h2" variant="h4">Register</Typography>
               <TextField
                 id="registerEmail"
                 label="Email"
@@ -128,13 +128,14 @@ class RegisterComponent extends Component<RegisterProps, RegisterState> {
                 />
 
               <Button
+              className="authButton"
               type="submit"
               disabled={!emailRegex.test(this.state.email) || this.state.password !== this.state.passwordConfirm}
               >
                 Register
               </Button>
             </form>
-            <p>Already have an account? <Link to="/login">Sign in here</Link></p>
+            <Typography component="p">Already have an account? <Link to="/login">Sign in here</Link></Typography>
           </Paper>
         </Container>
       )

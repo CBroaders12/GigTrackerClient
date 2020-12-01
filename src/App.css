@@ -6,17 +6,31 @@
   justify-content: space-between;
 }
 
+#brand {
+  text-decoration: none;
+  color: white;
+}
+
+.navButton {
+  color: white !important;
+  margin: 0 1rem !important;
+}
+
 .authContainer {
-  height: 85vh;
+  height: 90vh;
   background: url('./images/mainBackground.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 5%; 
 }
 
-.navBar {
-  /* background: rgb(0, 132, 184) !important; */
+.authButton {
+  margin: 1rem 0 !important;
 }
+
+/* .navBar {
+  background: rgb(0, 132, 184) !important;
+} */
 
 .authForm {
   min-width: 350px;
@@ -26,7 +40,9 @@
 }
 
 #footer {
-  background-color: white;
+  background-color: rgb(201, 201, 201);
+  position: fixed;
+  bottom: 0;
 }
 
 #musicPreview,
@@ -92,4 +108,12 @@
 
 .gigMusicButton {
   margin: 0.5rem 0 !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+#musicPageContainer {
+  margin-top: 2rem;
 }

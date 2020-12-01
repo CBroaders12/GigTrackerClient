@@ -48,12 +48,8 @@ class GigList extends Component<GigListProps, GigListState> {
     });
   }
 
-  updateGigList(): void {
-
-  }
-
   componentDidMount() {
-    this.fetchGigs();
+    setTimeout(() => this.fetchGigs(), 250)
   }
 
   componentDidUpdate(prevProps: GigListProps, prevState: GigListState) {

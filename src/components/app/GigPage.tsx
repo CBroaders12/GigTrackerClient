@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { Container, Box, Button, Card, CardContent, Typography } from '@material-ui/core';
 import { Add, Delete, Edit } from '@material-ui/icons';
@@ -190,14 +190,16 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
           >
             Add Song
           </Button>
-          <Button
-          color="secondary"
-          variant="contained"
-          startIcon={<Delete />}
-          onClick={() => this.handleGigDelete()}
-          >
-            Delete Gig
-          </Button>
+          <Link to='/'>
+            <Button
+            color="secondary"
+            variant="contained"
+            startIcon={<Delete />}
+            onClick={() => this.handleGigDelete()}
+            >
+              Delete Gig
+            </Button>
+            </Link>
           <Box display="flex" flexDirection="column" id="gigRepBox">
             {
               this.state.musicList.map(piece => {

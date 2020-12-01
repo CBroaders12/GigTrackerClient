@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { Table, TableBody, TableCell, TableHead, TableContainer, TableRow, Paper, Container, IconButton, Button } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableContainer, TableRow, Paper, Container, IconButton, Button, Typography } from '@material-ui/core';
 import { Delete, Edit, Add } from '@material-ui/icons';
 
 import NewMusicModal from './modals/NewMusicModal';
@@ -104,8 +104,8 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
 
     if (localStorage.getItem('sessionToken')) {
       return(
-        <Container maxWidth="lg">
-          <h1>Welcome to the Music Page</h1>
+        <Container maxWidth="lg" id="musicPageContainer">
+          <Typography component="h1" variant="h4">Your Music</Typography>
           <Button
           className="addButton"
           color="primary"
@@ -118,7 +118,7 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
-                <TableRow>
+                <TableRow style={{backgroundColor: "lightgrey"}}>
                   <TableCell>Title</TableCell>
                   <TableCell>Artist</TableCell>
                   <TableCell>Style</TableCell>

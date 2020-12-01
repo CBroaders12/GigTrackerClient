@@ -13,23 +13,25 @@ class NavigationComponent extends Component<NavbarProps, {/* state */}> {
     return(
       <AppBar position="static" color="secondary" className="navBar">
         <Toolbar>
-          <Typography variant="h6" >
-            GigTracker
-          </Typography>
+          <Link to="/">
+            <Typography variant="h6" color="inherit" id="brand">
+              GigTracker
+            </Typography>
+          </Link>
           <Box>
             { this.props.token 
               ? <>
-                  <Link to="/"><Button>Home</Button></Link>
-                  <Link to="/music"><Button>Your Music</Button></Link>
+                  <Link to="/"><Button className="navButton">Home</Button></Link>
+                  <Link to="/music"><Button className="navButton">Your Music</Button></Link>
                   {this.props.isAdmin
-                    ? <Link to="/users"><Button>Users</Button></Link>
+                    ? <Link to="/users"><Button className="navButton">Users</Button></Link>
                     : <></>
                   }
-                  <Link to="/login"><Button onClick={this.props.handleLogout}>Logout</Button></Link>
+                  <Link to="/login"><Button className="navButton" onClick={this.props.handleLogout}>Logout</Button></Link>
                 </>
               : <>
-                  <Link to="/login"><Button >Login</Button></Link>
-                  <Link to="/register"><Button >Register</Button></Link>
+                  <Link to="/login"><Button className="navButton">Login</Button></Link>
+                  <Link to="/register"><Button className="navButton">Register</Button></Link>
                 </>
             }
           </Box>

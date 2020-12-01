@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { Paper, Container, TextField, Button } from '@material-ui/core';
+import { Paper, Container, TextField, Button, Typography } from '@material-ui/core';
 
 type LoginState = {
   email: string,
@@ -71,7 +71,7 @@ class LoginComponent extends Component<LoginProps, LoginState> {
         <Container className="authContainer" maxWidth={false}>
           <Paper className="authForm" elevation={5}>
             <form onSubmit={this.onLoginSubmit}>
-              <h2>Login</h2>
+              <Typography component="h2" variant="h4">Login</Typography>
               <TextField
               id="loginEmail"
               label="Email"
@@ -94,12 +94,13 @@ class LoginComponent extends Component<LoginProps, LoginState> {
               />
 
               <Button 
+              className="authButton"
               type="submit" 
               disabled={!this.state.email || !this.state.password}
               color="inherit"
               >Login</Button>
             </form>
-            <p>Need to create an account? <Link to="/register">Register here</Link></p>
+            <Typography component="p">Need to create an account? <Link to="/register">Register here</Link></Typography>
           </Paper>
         </Container>
       )
