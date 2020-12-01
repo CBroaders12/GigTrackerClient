@@ -53,7 +53,8 @@
 
 #newMusicModal,
 #newGigModal,
-#updateMusicModal {
+#updateMusicModal,
+#editNotesModal {
   max-width: 500px;
   height: 100%;
   margin: 5rem auto;

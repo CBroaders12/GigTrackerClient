@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { Container, Box, Button, Card, CardContent, Typography } from '@material-ui/core';
 import { Add, Delete, Edit } from '@material-ui/icons';
 
 import MusicSearchModal from './modals/MusicSearchModal';
 import UpdateGigModal from './modals/UpdateGigModal';
+import EditNotesModal from './modals/EditNotesModal';
+
+type GigMusicEntry = {
+  id: number,
+  title: string,
+  artist: string | null,
+  style: string | null,
+  instrument: string | null,
+  duration: string | null,
+  userId: number,
+  createdAt: string,
+  updatedAt: string,
+  set: any
+}
 
 type GigInfo = {
   id: number | null,
@@ -24,6 +38,8 @@ type GigPageState = {
   gigDate: string,
   isAddMusicModalOpen: boolean,
   isUpdateGigModalOpen: boolean,
+  isEditNotesModalOpen: boolean,
+  activeMusic: GigMusicEntry
 }
 
 class GigPageComponent extends Component<GigPageProps, GigPageState> {
@@ -36,6 +52,8 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
       gigDate: this.props.gigInfo.date,
       isAddMusicModalOpen: false,
       isUpdateGigModalOpen: false,
+      isEditNotesModalOpen: false,
+      activeMusic: {} as GigMusicEntry
     }
 
     this.fetchGigMusic = this.fetchGigMusic.bind(this);
@@ -43,6 +61,8 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     this.closeAddSongModal = this.closeAddSongModal.bind(this);
     this.openUpdateGigModal = this.openUpdateGigModal.bind(this);
     this.closeUpdateGigModal = this.closeUpdateGigModal.bind(this);
+    this.openEditNotesModal = this.openEditNotesModal.bind(this);
+    this.closeEditNotesModal = this.closeEditNotesModal.bind(this);
     this.handleMusicDelete = this.handleMusicDelete.bind(this);
     this.handleGigDelete = this.handleGigDelete.bind(this);
   }
@@ -50,25 +70,43 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
   openAddSongModal(): void {
     this.setState({
       isAddMusicModalOpen: true,
-    })
+    });
   }
 
   closeAddSongModal(): void {
     this.setState({
       isAddMusicModalOpen: false,
-    })
+    });
   }
 
   openUpdateGigModal(): void {
     this.setState({
       isUpdateGigModalOpen: true
-    })
+    });
   }
 
   closeUpdateGigModal(): void {
     this.setState({
       isUpdateGigModalOpen: false
-    })
+    });
+  }
+
+  openEditNotesModal(piece: GigMusicEntry): void {
+    this.setState({
+      isEditNotesModalOpen: true,
+      activeMusic: piece
+    });
+
+    console.log(this.state.activeMusic)
+  }
+
+  closeEditNotesModal(): void {
+    console.log(this.state.activeMusic)
+
+    this.setState({
+      isEditNotesModalOpen: false,
+      activeMusic: {} as GigMusicEntry
+    });
   }
 
   async handleGigDelete(): Promise<void> {
@@ -123,6 +161,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
     if (prevState.isAddMusicModalOpen !== this.state.isAddMusicModalOpen
       || prevState.musicList.length !== this.state.musicList.length
       || prevState.isUpdateGigModalOpen !== this.state.isUpdateGigModalOpen
+      || prevState.isEditNotesModalOpen !== this.state.isEditNotesModalOpen
     ) {
       this.fetchGigMusic();
     }
@@ -175,7 +214,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
                         variant="outlined"
                         color="primary"
                         startIcon={<Edit />}
-                        // onClick={() => this.handleNoteUpdate(piece.id)}
+                        onClick={() => this.openEditNotesModal(piece)}
                         >
                           Edit Notes
                         </Button>
@@ -208,6 +247,13 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
           closeModal={this.closeUpdateGigModal}
           isOpen={this.state.isUpdateGigModalOpen}
           gigInfo={this.props.gigInfo}
+          />
+          <EditNotesModal
+          token={this.props.token}
+          closeModal={this.closeEditNotesModal}
+          isOpen={this.state.isEditNotesModalOpen}
+          musicId={this.state.activeMusic.id}
+          gigId={this.props.gigInfo.id}
           />
         </Container>
       )
