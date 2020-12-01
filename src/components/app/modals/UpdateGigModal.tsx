@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Modal, TextField, Button, Paper } from '@material-ui/core';
 import { Update } from '@material-ui/icons';
@@ -70,7 +69,8 @@ class UpdateGigModal extends Component<UpdateGigProps, UpdateGigState> {
   render() {
     return(
       <Modal
-        id="newGigModal"
+        id="updateGigModal"
+        className="modal"
         open={this.props.isOpen}
         onClose={() => this.props.closeModal()}
       >

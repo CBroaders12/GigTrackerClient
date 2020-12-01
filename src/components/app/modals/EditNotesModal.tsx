@@ -42,7 +42,7 @@ class EditNotesModal extends Component<EditNotesProps, EditNotesState> {
     let response = await fetch(`http://localhost:5200/gig/${this.props.gigId}/${this.props.musicId}`, {
       method: 'PUT',
       headers: new Headers({
-        'Content-Type': 'applications/json',
+        'Content-Type': 'application/json',
         Authorization: this.props.token as string,
       }),
       body: JSON.stringify({notes: this.state.notes})
@@ -60,6 +60,7 @@ class EditNotesModal extends Component<EditNotesProps, EditNotesState> {
     return(
       <Modal
         id="editNotesModal"
+        className="modal"
         open={this.props.isOpen}
         onClose={() => this.props.closeModal()}
       >

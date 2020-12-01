@@ -116,6 +116,7 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
     return(
       <Modal
         id="updateMusicModal"
+        className="modal"
         open={this.props.isOpen}
         onClose={this.props.closeModal}
       >

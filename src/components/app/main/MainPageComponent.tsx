@@ -59,6 +59,7 @@ class MainPageComponent extends Component<MainProps, MainState> {
               <MusicPreview
                 token={this.props.token}
                 openModal={this.props.openNewMusicModal}
+                isModalOpen={this.props.isMusicModalOpen}
               />
             </Grid>
             <Grid item xs={8} id="gigList">

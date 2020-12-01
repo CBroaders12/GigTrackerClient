@@ -100,6 +100,7 @@ class NewMusicModal extends Component<MusicModalProps, MusicModalState> {
     return(
       <Modal
         id="newMusicModal"
+        className="modal"
         open={this.props.isOpen}
         onClose={this.props.closeModal}
       >
@@ -158,6 +159,7 @@ class NewMusicModal extends Component<MusicModalProps, MusicModalState> {
             />
             <Button
               className="addButton"
+              color="primary"
               variant="contained"
               size="large"
               startIcon={<Add />}

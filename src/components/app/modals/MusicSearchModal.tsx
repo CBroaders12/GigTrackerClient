@@ -99,7 +99,8 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
   render() {
     return(
       <Modal
-      id="newGigModal"
+      id="musicSearchModal"
+      className="modal"
       open={this.props.isOpen}
       onClose={this.props.closeModal}
       >

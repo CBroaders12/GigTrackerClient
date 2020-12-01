@@ -51,18 +51,15 @@
   margin: 1rem !important;
 }
 
-#newMusicModal,
-#newGigModal,
-#updateMusicModal,
-#editNotesModal {
+.modal {
   max-width: 500px;
   height: 100%;
   margin: 5rem auto;
   outline: 0;
 }
 
-#newMusicModal .MuiPaper-root form {
-  padding: 1rem, 2.5rem !important;
+.modal .MuiPaper-root {
+  padding: 2rem 3.5rem;
 }
 
 .gigCard {

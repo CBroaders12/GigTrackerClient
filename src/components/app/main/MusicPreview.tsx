@@ -6,6 +6,7 @@ import { Add } from '@material-ui/icons';
 type PreviewProps = {
   token: string | null,
   openModal: () => void,
+  isModalOpen: boolean,
 }
 
 type PreviewState = {
@@ -40,11 +41,11 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
     this.fetchMusic()
   }
 
-  // componentDidUpdate(prevProps: PreviewProps, prevState: PreviewState) {
-  //   if (false) {
-
-  //   }
-  // }
+  componentDidUpdate(prevProps: PreviewProps, prevState: PreviewState) {
+    if (prevProps.isModalOpen === true) {
+      this.fetchMusic();
+    }
+  }
 
   render() {
     // Only display the first six music entries in the preview

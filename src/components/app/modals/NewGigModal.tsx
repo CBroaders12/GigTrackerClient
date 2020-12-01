@@ -66,6 +66,7 @@ class NewGigModal extends Component<GigModalProps, GigModalState> {
     return(
       <Modal
         id="newGigModal"
+        className="modal"
         open={this.props.isOpen}
         onClose={this.props.closeModal}
       >
@@ -94,6 +95,7 @@ class NewGigModal extends Component<GigModalProps, GigModalState> {
             />
             <Button
               className="addButton"
+              color="primary"
               variant="contained"
               size="large"
               startIcon={<Add />}
