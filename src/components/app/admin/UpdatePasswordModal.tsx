@@ -29,7 +29,7 @@ class UpdatePasswordModal extends Component<UpdatePasswordProps, UpdatePasswordS
   async handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    await fetch(`http://localhost:5200/admin/updatepassword/${this.props.userId}`, {
+    await fetch(`https://cpb-gigtracker.herokuapp.com/admin/updatepassword/${this.props.userId}`, {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json',

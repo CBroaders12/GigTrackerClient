@@ -35,7 +35,7 @@ class MusicPreview extends Component<PreviewProps, PreviewState> {
   }
 
   async fetchMusic(): Promise<void> {
-    let musicResponse = await fetch('http://localhost:5200/music', {
+    let musicResponse = await fetch('https://cpb-gigtracker.herokuapp.com/music', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',

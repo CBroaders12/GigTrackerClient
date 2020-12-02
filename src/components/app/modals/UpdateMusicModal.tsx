@@ -94,7 +94,7 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
   async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    await fetch(`http://localhost:5200/music/${this.props.musicInfo.id}`, {
+    await fetch(`https://cpb-gigtracker.herokuapp.com/music/${this.props.musicInfo.id}`, {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -175,6 +175,7 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
             />
             <Button
               className="addButton"
+              color="primary"
               variant="contained"
               size="large"
               startIcon={<Update />}

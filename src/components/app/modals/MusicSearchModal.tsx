@@ -46,7 +46,7 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
   }
 
   async fetchMusic(): Promise<void> {
-    let response = await fetch('http://localhost:5200/music', {
+    let response = await fetch('https://cpb-gigtracker.herokuapp.com/music', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
   async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    await fetch(`http://localhost:5200/gig/${this.props.gigId}/add`, {
+    await fetch(`https://cpb-gigtracker.herokuapp.com/gig/${this.props.gigId}/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

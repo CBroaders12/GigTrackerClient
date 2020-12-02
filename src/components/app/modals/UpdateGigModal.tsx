@@ -51,7 +51,7 @@ class UpdateGigModal extends Component<UpdateGigProps, UpdateGigState> {
   async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}`, {
+    await fetch(`https://cpb-gigtracker.herokuapp.com/gig/${this.props.gigInfo.id}`, {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json',

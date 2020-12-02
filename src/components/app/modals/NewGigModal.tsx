@@ -42,7 +42,7 @@ class NewGigModal extends Component<GigModalProps, GigModalState> {
   async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    await fetch('http://localhost:5200/gig/new', {
+    await fetch('https://cpb-gigtracker.herokuapp.com/gig/new', {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',

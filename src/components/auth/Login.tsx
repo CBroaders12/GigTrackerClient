@@ -29,7 +29,7 @@ class LoginComponent extends Component<LoginProps, LoginState> {
     event.preventDefault()
 
     if (this.state.email && this.state.password) {
-      let response = await fetch('http://localhost:5200/user/login', {
+      let response = await fetch('https://cpb-gigtracker.herokuapp.com/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

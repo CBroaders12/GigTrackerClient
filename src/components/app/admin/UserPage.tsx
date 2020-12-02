@@ -43,7 +43,7 @@ class UserPageComponent extends Component<UserPageProps, UserPageState> {
   }
   
   async fetchUsers(): Promise<void> {
-    let response = await fetch('http://localhost:5200/admin/users', {
+    let response = await fetch('https://cpb-gigtracker.herokuapp.com/admin/users', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ class UserPageComponent extends Component<UserPageProps, UserPageState> {
   }
 
   async deleteUser(userId: number): Promise<void> {
-    await fetch(`http://localhost:5200/admin/users/${userId}`, {
+    await fetch(`https://cpb-gigtracker.herokuapp.com/admin/users/${userId}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ class UserPageComponent extends Component<UserPageProps, UserPageState> {
   }
 
   async makeAdmin(userId: number): Promise<void> {
-    fetch(`http://localhost:5200/admin/add/${userId}`, {
+    fetch(`https://cpb-gigtracker.herokuapp.com/admin/add/${userId}`, {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json',

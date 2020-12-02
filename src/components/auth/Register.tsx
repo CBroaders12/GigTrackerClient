@@ -36,7 +36,7 @@ class RegisterComponent extends Component<RegisterProps, RegisterState> {
 
     if (this.state.email && this.state.password && this.state.passwordConfirm) {
       if (this.state.password === this.state.passwordConfirm) {
-        let response = await fetch('http://localhost:5200/user/register', {
+        let response = await fetch('https://cpb-gigtracker.herokuapp.com/user/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

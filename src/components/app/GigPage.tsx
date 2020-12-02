@@ -106,7 +106,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
   }
 
   async handleGigDelete(): Promise<void> {
-    await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}`, {
+    await fetch(`https://cpb-gigtracker.herokuapp.com/gig/${this.props.gigInfo.id}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
   }
 
   async handleMusicDelete(target: number): Promise<void> {
-    await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}/${target}`, {
+    await fetch(`https://cpb-gigtracker.herokuapp.com/gig/${this.props.gigInfo.id}/${target}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
   }
 
   async fetchGigMusic(): Promise<void> {
-    let response = await fetch(`http://localhost:5200/gig/${this.props.gigInfo.id}`, {
+    let response = await fetch(`https://cpb-gigtracker.herokuapp.com/gig/${this.props.gigInfo.id}`, {
         method: 'GET',
         headers: new Headers({
           'Content-Type': 'application/json',

@@ -70,7 +70,7 @@ class NewMusicModal extends Component<MusicModalProps, MusicModalState> {
   async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    await fetch('http://localhost:5200/music/new', {
+    await fetch('https://cpb-gigtracker.herokuapp.com/music/new', {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',

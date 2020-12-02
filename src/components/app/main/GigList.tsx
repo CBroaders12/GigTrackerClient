@@ -33,7 +33,7 @@ class GigList extends Component<GigListProps, GigListState> {
   }
 
   async fetchGigs(): Promise<void> {
-    let gigResponse = await fetch('http://localhost:5200/gig', {
+    let gigResponse = await fetch('https://cpb-gigtracker.herokuapp.com/gig', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',

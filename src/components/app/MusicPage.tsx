@@ -49,7 +49,7 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
   }
 
   async fetchMusic(): Promise<void> {
-    let response = await fetch('http://localhost:5200/music', {
+    let response = await fetch('https://cpb-gigtracker.herokuapp.com/music', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ class MusicPageComponent extends Component<MusicPageProps, MusicPageState> {
   }
 
   async deleteMusic(musicId: number): Promise<void> {
-    await fetch(`http://localhost:5200/music/${musicId}`, {
+    await fetch(`https://cpb-gigtracker.herokuapp.com/music/${musicId}`, {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
