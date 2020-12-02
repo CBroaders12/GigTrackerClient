@@ -3,6 +3,18 @@ import React, { Component } from 'react';
 import { Modal, Select, MenuItem, TextField, Button, Paper } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 
+type MusicEntry = {
+  id: number,
+  title: string,
+  artist: string | null,
+  style: string | null,
+  instrument: string | null,
+  duration: string | null,
+  userId: number,
+  createdAt: string,
+  updatedAt: string,
+}
+
 type SearchModalProps = {
   token: string | null,
   openModal: () => void,
@@ -14,7 +26,7 @@ type SearchModalProps = {
 type SearchModalState = {
   musicId: number | null,
   notes: string | null,
-  musicList: Array<any>
+  musicList: Array<MusicEntry>
 }
 
 class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
@@ -82,10 +94,6 @@ class MusicSearchModal extends Component<SearchModalProps, SearchModalState> {
       notes: event.target.value
     });
   }
-
-  // componentDidMount() {
-  //   this.fetchMusic();
-  // }
 
   componentDidUpdate(prevProps: SearchModalProps, prevState: SearchModalState) {
     if (prevProps.isOpen !== this.props.isOpen) {

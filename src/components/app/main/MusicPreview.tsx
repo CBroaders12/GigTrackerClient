@@ -3,6 +3,18 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, Button, Typography} from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 
+type MusicEntry = {
+  id: number,
+  title: string,
+  artist: string | null,
+  style: string | null,
+  instrument: string | null,
+  duration: string | null,
+  userId: number,
+  createdAt: string,
+  updatedAt: string,
+}
+
 type PreviewProps = {
   token: string | null,
   openModal: () => void,
@@ -10,7 +22,7 @@ type PreviewProps = {
 }
 
 type PreviewState = {
-  musicEntries: Array<any>
+  musicEntries: Array<MusicEntry>
 }
 
 class MusicPreview extends Component<PreviewProps, PreviewState> {

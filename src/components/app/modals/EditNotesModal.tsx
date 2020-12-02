@@ -37,9 +37,7 @@ class EditNotesModal extends Component<EditNotesProps, EditNotesState> {
   async handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    console.log(`State being sent: ${this.state.notes}`);
-
-    let response = await fetch(`http://localhost:5200/gig/${this.props.gigId}/${this.props.musicId}`, {
+    await fetch(`http://localhost:5200/gig/${this.props.gigId}/${this.props.musicId}`, {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -48,12 +46,7 @@ class EditNotesModal extends Component<EditNotesProps, EditNotesState> {
       body: JSON.stringify({notes: this.state.notes})
     });
 
-    let parsedResponse = await response.json();
-
-    console.log(parsedResponse);
-
     this.props.closeModal();
-
   }
 
   render() {

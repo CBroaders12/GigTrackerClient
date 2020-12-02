@@ -49,7 +49,7 @@ class UpdateMusicModal extends Component<MusicModalProps, MusicModalState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate(prevProps: any, prevState: any) {
+  componentDidUpdate(prevProps: MusicModalProps, prevState: MusicModalState) {
     if (prevProps.musicInfo !== this.props.musicInfo) {
       this.setState({
         title: this.props.musicInfo.title,

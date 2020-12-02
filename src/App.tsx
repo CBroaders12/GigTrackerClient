@@ -55,7 +55,7 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
-  handleLogout(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  handleLogout(): void {
     localStorage.removeItem('sessionToken');
     this.setState({
       token: null,

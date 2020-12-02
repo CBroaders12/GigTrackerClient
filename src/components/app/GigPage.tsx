@@ -33,7 +33,7 @@ type GigPageProps = {
 }
 
 type GigPageState = {
-  musicList: Array<any>,
+  musicList: Array<GigMusicEntry>,
   gigName: string,
   gigDate: string,
   isAddMusicModalOpen: boolean,
@@ -96,13 +96,9 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
       isEditNotesModalOpen: true,
       activeMusic: piece
     });
-
-    console.log(this.state.activeMusic)
   }
 
   closeEditNotesModal(): void {
-    console.log(this.state.activeMusic)
-
     this.setState({
       isEditNotesModalOpen: false,
       activeMusic: {} as GigMusicEntry
@@ -124,7 +120,7 @@ class GigPageComponent extends Component<GigPageProps, GigPageState> {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
-        'Authorization': this.props.token ? this.props.token : ""
+        Authorization: this.props.token as string,
       })
     });
 

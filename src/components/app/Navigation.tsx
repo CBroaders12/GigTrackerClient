@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 type NavbarProps = {
   token: string | null,
-  handleLogout: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  handleLogout: () => void,
   isAdmin: boolean,
 }
 
