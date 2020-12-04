@@ -4,7 +4,7 @@ A simple music and gig tracking web application for musicians to keep track of m
 
 ## Motivation
 
-The project is the final project for the Web Development Course at [Eleven Fifty Academy](https://elevenfifty.org).
+This repository is the front-end of my final project for the Web Development Course at [Eleven Fifty Academy](https://elevenfifty.org).
 
 ## Tech/framework used
 
